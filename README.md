@@ -39,3 +39,11 @@ Remove all useless items
 
 Go to created folder: `cd cardCraft-api`   
 Run php server: `php artisan serve`
+
+## Mysql server
+
+If docker run, stop it before running mysql server   
+If you need to run docker run, stop mysql before running docker
+
+Start `mysql.server start`   
+Stop `mysql.server stop`
