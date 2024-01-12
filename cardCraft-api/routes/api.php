@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/testRoute', function (Request $request) {
-    return 'coucou';
+    return '';
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
