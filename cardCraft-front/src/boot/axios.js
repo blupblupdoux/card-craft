@@ -9,6 +9,10 @@ import axios from 'axios'
 // for each client)
 const api = axios.create()
 
+// Auth config
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
