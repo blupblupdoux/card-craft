@@ -103,7 +103,11 @@ module.exports = configure(function (/* ctx */) {
         '/api': {
           target: 'http://127.0.0.1:8000',
           changeOrigin: true,
-        }
+        },
+        '/sanctum': {
+          target: 'http://127.0.0.1:8000',
+          changeOrigin: true,
+        },
       }
     },
 

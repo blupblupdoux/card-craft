@@ -2,7 +2,11 @@
 const routes = [
   {
     path: '/',
-    component: () => import('components/MainNavbar.vue'),
+    component: () => import('components/NavMenu.vue'),
+  },
+  {
+    path: '/login',
+    component: () => import('components/AuthLogin.vue'),
   },
 
   // Always leave this as last one,

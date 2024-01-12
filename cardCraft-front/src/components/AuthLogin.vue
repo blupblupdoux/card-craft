@@ -6,6 +6,10 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-name: 'AuthLogin'
+name: 'AuthLogin',
+mounted() {
+	// Initialize CSRF token
+	this.$api.get('/sanctum/csrf-cookie')
+}
 })
 </script>
