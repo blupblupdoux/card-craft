@@ -2,16 +2,12 @@
     <div></div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { onMounted } from 'vue';
+import { api } from 'src/boot/axios'
 
-export default defineComponent({
-name: 'AuthLogin',
-mounted() {
-	// Initialize CSRF token
-	this.$api.get('/sanctum/csrf-cookie')
-
-	this.$api.get('/api/testRoute')
-}
+onMounted(() => {
+  // Initialize CSRF token
+  api.get('/sanctum/csrf-cookie')
 })
 </script>

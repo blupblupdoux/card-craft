@@ -2,10 +2,11 @@
     <div></div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { api } from 'src/boot/axios'
 
-export default defineComponent({
-  name: 'AuthRegister'
-})
+// const register = () => {
+//   // api.post('/api/register', {username: 'test1234', password: 'test123', name: 'test123', email: 'test1234@test.com'})
+// }
+
 </script>
