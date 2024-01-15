@@ -1,1 +1,7 @@
-// app global css in SCSS form
+@import './quasar.variables.scss';
+
+h1 {
+    color: $primary;
+    font-size: xx-large;
+    font-weight: 500;
+}
