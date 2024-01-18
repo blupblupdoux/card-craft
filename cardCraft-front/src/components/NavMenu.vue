@@ -1,6 +1,6 @@
 <template>
     <div>
-        coucou
+        Dashboard !
     </div>
 </template>
 

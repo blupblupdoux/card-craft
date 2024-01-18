@@ -2,14 +2,17 @@
 const routes = [
   {
     path: '/',
+    name: "home",
     component: () => import('components/NavMenu.vue'),
   },
   {
     path: '/login',
+    name: "login",
     component: () => import('components/AuthLogin.vue'),
   },
   {
     path: '/register',
+    name: "register",
     component: () => import('components/AuthRegister.vue'),
   },
 

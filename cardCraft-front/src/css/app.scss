@@ -6,6 +6,11 @@ h1 {
     font-weight: 500;
 }
 
+.link {
+  color: $secondary;
+  text-decoration: underline;
+}
+
 #loginPage, #registerPage {
    h1 {
     text-align: center;

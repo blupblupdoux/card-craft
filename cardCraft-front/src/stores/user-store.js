@@ -21,9 +21,14 @@ export const useUserStore = defineStore('user', {
     updateToken(payload) {
       this.token = payload
     },
-    asyncauthenticate(payload) {
+    storeTokenInStorage(payload) {
+      localStorage.setItem('card-craft-auth-token', payload)
+    },
+    authenticate(payload) {
       this.updateUser(payload.user)
       this.updateToken(payload.token)
+      this.storeTokenInStorage(payload.token)
+      this.router.push('/')
     }
   },
 });

@@ -22,12 +22,19 @@
 
         <q-btn type="submit" label="Login" color="primary" />
       </q-form>
+
+      <div class="link" @click="router.push({name: 'register'})">You don't have an account? Register for free.</div>
     </div>
 </template>
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { api } from 'src/boot/axios'
+import { useUserStore } from 'src/stores/user-store';
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 let form = reactive({
   username: '',
@@ -37,13 +44,9 @@ let form = reactive({
 let errorMessage = ref('')
 
 const authenticate = () => {
-  
-  console.log(form);
-
   api.post('/api/authenticate', form).then(response => {
-    console.log(response.data);
+    userStore.authenticate(response.data)
   }).catch(error => {
-    console.log('truc')
     errorMessage.value = error?.response?.data?.data?.message
   })
 }
@@ -53,3 +56,12 @@ onMounted(() => {
   api.get('/sanctum/csrf-cookie')
 })
 </script>
+
+<style scoped>
+
+#loginPage .link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+</style>
