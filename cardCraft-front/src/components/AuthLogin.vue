@@ -28,12 +28,12 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive } from 'vue';
 import { api } from 'src/boot/axios'
 import { useUserStore } from 'src/stores/user-store';
 import { useRouter } from 'vue-router'
 
-const userStore = useUserStore()
+let userStore = useUserStore()
 const router = useRouter()
 
 let form = reactive({
@@ -45,16 +45,11 @@ let errorMessage = ref('')
 
 const authenticate = () => {
   api.post('/api/authenticate', form).then(response => {
-    userStore.authenticate(response.data)
+    userStore.authenticate(response.data.data)
   }).catch(error => {
     errorMessage.value = error?.response?.data?.data?.message
   })
 }
-
-onMounted(() => {
-  // Initialize CSRF token
-  api.get('/sanctum/csrf-cookie')
-})
 </script>
 
 <style scoped>

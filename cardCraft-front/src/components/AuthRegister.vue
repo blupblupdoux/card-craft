@@ -58,6 +58,9 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { api } from 'src/boot/axios'
+import { useUserStore } from 'src/stores/user-store';
+
+const userStore = useUserStore()
 
 let form = reactive({
   name: '',
@@ -74,7 +77,7 @@ const register = () => {
   console.log(form);
 
   api.post('/api/register', form).then(response => {
-    console.log(response.data);
+    userStore.authenticate(response.data.data)
   }).catch(error => {
     errors.value = error?.response?.data?.errors
   })

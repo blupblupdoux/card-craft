@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testRoute', function (Request $request) {
-    return '';
-});
+Route::get('/initialize', [AuthController::class, 'initialize']);
 
 // Authentication
 Route::post('/register', [AuthController::class, 'register']);

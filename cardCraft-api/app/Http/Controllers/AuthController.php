@@ -7,10 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
+    public function initialize() {
+
+        $authorizationToken = app('request')->header('authorization');
+        $bearerToken = $authorizationToken ? substr($authorizationToken, 7) : null;
+        $personalToken = PersonalAccessToken::findToken($bearerToken);
+        $user = $personalToken && $personalToken->tokenable ? $personalToken->tokenable : null;
+
+        return (new JsonResource([
+            'user' => $user,
+            'env' => env('APP_ENV')
+        ]))->response()->setStatusCode(Response::HTTP_OK);
+    }
+
     public function register(Request $request) {
 
         // Check data

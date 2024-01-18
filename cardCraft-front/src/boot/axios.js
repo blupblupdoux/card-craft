@@ -18,8 +18,12 @@ export default boot(({ app }) => {
   
   const userStore = useUserStore()
 
+  // Retieve token from storage
+  const token = localStorage.getItem('card-craft-auth-token')
+
   // Auto store Bearer token in each axios queries
-  if (userStore.token) {
+  if (token) {
+    userStore.updateToken(token)
     api.interceptors.request.use((config) => {
       config.headers.Authorization = `Bearer ${userStore.token}`;
       return config;

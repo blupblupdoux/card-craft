@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { api } from 'boot/axios'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -20,15 +21,27 @@ export const useUserStore = defineStore('user', {
     },
     updateToken(payload) {
       this.token = payload
-    },
-    storeTokenInStorage(payload) {
       localStorage.setItem('card-craft-auth-token', payload)
+    },
+    initialize() {
+      return new Promise((resolve, reject) => {
+
+        // Initialize CSRF token
+        api.get('/sanctum/csrf-cookie').then(() => {
+
+          // Load initial data
+          api.get('/api/initialize')
+            .then(response => {
+              this.updateUser(response.data.data.user)
+              resolve()
+            })
+        })
+      })
     },
     authenticate(payload) {
       this.updateUser(payload.user)
       this.updateToken(payload.token)
-      this.storeTokenInStorage(payload.token)
       this.router.push('/')
-    }
+    },
   },
 });
