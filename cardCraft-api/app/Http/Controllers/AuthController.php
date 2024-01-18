@@ -49,7 +49,7 @@ class AuthController extends Controller
             return (new JsonResource(['message'=> 'Wrong credentials.']))->response()->setStatusCode(Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('username', $request->username)->first();
 
         return (new JsonResource([
             'message' => 'Successful authentication.',

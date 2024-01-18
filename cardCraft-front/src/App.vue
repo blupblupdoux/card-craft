@@ -9,3 +9,11 @@ export default defineComponent({
   name: 'App'
 })
 </script>
+
+<style>
+
+#q-app {
+  padding: 0 1rem;
+}
+
+</style>

@@ -81,29 +81,3 @@ const register = () => {
 }
 
 </script>
-
-<style lang=scss scoped>
-
-#registerPage {
-  padding: 0 1rem;
-
-  h1 {
-    text-align: center;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-
-    small, .q-field {
-      margin-bottom: 1rem;
-    }
-
-    .q-btn {
-      align-self: center;
-      margin-top: .5rem;
-    }
-  }
-}
-
-</style>
