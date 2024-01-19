@@ -1,11 +1,11 @@
 <template>
-   <div></div>
+  
+  <q-drawer v-model="model" side="right" overlay bordered>
+        <!-- drawer content -->
+  </q-drawer>
+  
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'NavMenuDrawer'
-})
+<script setup>
+const model = defineModel()
 </script>

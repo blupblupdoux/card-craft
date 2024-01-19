@@ -1,14 +1,21 @@
 <template>
-	<component :is="data.url ? 'router-link' : 'span'" :to="data.url" class="nav-menu-item">
+	<component :is="data.url ? 'router-link' : 'span'" :to="data.url" @click="!data.url ? drawerOpen = !drawerOpen : null" class="nav-menu-item">
 		<q-icon :name="data.icon" size="35px" />
 		<div class="nav-menu-item-label">{{ data.label }}</div>
 	</component>
+
+	<nav-menu-drawer v-model="drawerOpen"></nav-menu-drawer>
 </template>
 
 <script setup>
+import NavMenuDrawer from './NavMenuDrawer.vue';
+import { ref } from 'vue'
+
 const props = defineProps({
   data: Object
 })
+let drawerOpen = ref(false)
+
 </script>
 
 <style lang="scss">
