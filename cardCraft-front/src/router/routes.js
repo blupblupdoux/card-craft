@@ -18,6 +18,12 @@ const routes = [
     meta: { auth: false },
     component: () => import('components/auth/AuthRegister.vue'),
   },
+  {
+    path: '/decks',
+    name: "decks",
+    meta: { auth: true },
+    component: () => import('components/DecksPage.vue'),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

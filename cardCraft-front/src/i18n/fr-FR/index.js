@@ -5,6 +5,12 @@ export default {
   common: {
     submitBtn: 'Soumettre'
   },
+  nav: {
+    homeBtn: 'Accueil',
+    decksBtn: 'Cartes',
+    statsBtn: 'Stats',
+    otherBtn: 'Autre',
+  },
   auth: {
     loginTitle: 'Connexion',
     registerTitle: 'Créer un compte',

@@ -5,6 +5,12 @@ export default {
   common: {
     submitBtn: 'Submit'
   },
+  nav: {
+    homeBtn: 'Home',
+    decksBtn: 'Decks',
+    statsBtn: 'Stats',
+    otherBtn: 'Other',
+  },
   auth: {
     loginTitle: 'Login',
     registerTitle: 'Create an account',

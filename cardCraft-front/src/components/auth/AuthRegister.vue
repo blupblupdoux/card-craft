@@ -1,12 +1,12 @@
 <template>
     <div id="registerPage">
-      <h1>{{ $t('auth.registerTitle') }}</h1>
+      <h1>{{ t('auth.registerTitle') }}</h1>
 
       <q-form @submit.prevent.stop="register">
 
-        <small>{{ $t('auth.requiredFields') }}</small>
+        <small>{{ t('auth.requiredFields') }}</small>
         <q-input v-model="form.name" 
-                :label="$t('auth.nameLabel')" 
+                :label="t('auth.nameLabel')" 
                 type="text"
                 :error="Object.hasOwn(errors, 'name')"
                 :error-message="errors?.name?.[0]"
@@ -14,7 +14,7 @@
         </q-input>
 
         <q-input v-model="form.email" 
-                :label="$t('auth.emailLabel')" 
+                :label="t('auth.emailLabel')" 
                 type="email"
                 :error="Object.hasOwn(errors, 'email')"
                 :error-message="errors?.email?.[0]"
@@ -22,7 +22,7 @@
         </q-input>
 
         <q-input v-model="form.username" 
-                :label="$t('auth.usernameLabel') + '*'" 
+                :label="t('auth.usernameLabel') + '*'" 
                 type="text" 
                 :error="Object.hasOwn(errors, 'username')"
                 :error-message="errors?.username?.[0]"
@@ -31,7 +31,7 @@
         </q-input>
 
         <q-input v-model="form.password" 
-                :label="$t('auth.passwordLabel') + '*'" 
+                :label="t('auth.passwordLabel') + '*'" 
                 type="password" 
                 :error="Object.hasOwn(errors, 'password')"
                 :error-message="errors?.password?.[0]"
@@ -40,7 +40,7 @@
         </q-input>
         
         <q-input v-model="form.password_confirm" 
-                :label="$t('auth.passwordConfirmLabel') + '*'" 
+                :label="t('auth.passwordConfirmLabel') + '*'" 
                 type="password" 
                 :error="Object.hasOwn(errors, 'password_confirm')"
                 :error-message="errors?.password_confirm?.[0]"
@@ -50,7 +50,7 @@
                 outlined>
         </q-input>
 
-        <q-btn type="submit" :label="$t('common.submitBtn')" color="primary" />
+        <q-btn type="submit" :label="t('common.submitBtn')" color="primary" />
       </q-form>
     </div>
 </template>
@@ -59,8 +59,10 @@
 import { ref, reactive } from 'vue';
 import { api } from 'src/boot/axios'
 import { useUserStore } from 'src/stores/user-store';
+import { useI18n } from 'vue-i18n';
 
 const userStore = useUserStore()
+const { t } = useI18n()
 
 let form = reactive({
   name: '',
