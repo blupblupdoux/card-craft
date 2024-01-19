@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testRoute', function (Request $request) {
-    return 'coucou';
-});
+Route::get('/initialize', [AuthController::class, 'initialize']);
+
+// Authentication
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/authenticate', [AuthController::class, 'authenticate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

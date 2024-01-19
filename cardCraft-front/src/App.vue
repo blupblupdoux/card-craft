@@ -2,10 +2,21 @@
   <router-view />
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { onMounted } from 'vue';
+import { useUserStore } from './stores/user-store';
+const userStore = useUserStore()
 
-export default defineComponent({
-  name: 'App'
+onMounted(() => {
+  userStore.initialize()
 })
+
 </script>
+
+<style>
+
+#q-app {
+  padding: 0 1rem;
+}
+
+</style>

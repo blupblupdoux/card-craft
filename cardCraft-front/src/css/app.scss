@@ -1,1 +1,37 @@
-// app global css in SCSS form
+@import './quasar.variables.scss';
+
+h1 {
+    color: $primary;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+.link {
+  color: $secondary;
+  text-decoration: underline;
+}
+
+#loginPage, #registerPage {
+   h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .q-field {
+      margin-bottom: 1rem;
+    }
+
+    .q-btn {
+      align-self: center;
+      margin-top: .5rem;
+    }
+
+    .form-error-message {
+      color: $negative;
+      font-weight: 500;
+    }
+  } 
+}

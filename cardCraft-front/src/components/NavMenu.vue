@@ -1,13 +1,14 @@
 <template>
     <div>
-        coucou
+        Dashboard !
+        {{ userStore.username }}
     </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { useUserStore } from 'src/stores/user-store';
 
-export default defineComponent({
-  name: 'NavMenu'
-})
+const userStore = useUserStore()
+
+
 </script>

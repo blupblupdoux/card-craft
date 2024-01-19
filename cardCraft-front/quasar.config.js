@@ -11,6 +11,7 @@
 
 const { configure } = require('quasar/wrappers');
 const path = require('path');
+const { all } = require('axios');
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -76,7 +77,9 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf(viteConf) {
+        viteConf.define.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
@@ -103,13 +106,31 @@ module.exports = configure(function (/* ctx */) {
         '/api': {
           target: 'http://127.0.0.1:8000',
           changeOrigin: true,
-        }
+        },
+        '/sanctum': {
+          target: 'http://127.0.0.1:8000',
+          changeOrigin: true,
+        },
       }
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        brand: {
+          primary: '#d16c2d',
+          secondary: '#22577a',
+          accent: '#22577a',
+  
+          dark: '#2b363b',
+          'dark-page': '#1e2426',
+  
+          positive: '#668a49',
+          negative: '#aa4465',
+          info: '#81818a',
+          warning: '#d39e0d'
+        }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

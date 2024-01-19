@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
+import { useUserStore } from 'src/stores/user-store';
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -9,7 +10,26 @@ import axios from 'axios'
 // for each client)
 const api = axios.create()
 
+// Auth config
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+
 export default boot(({ app }) => {
+  
+  const userStore = useUserStore()
+
+  // Retieve token from storage
+  const token = localStorage.getItem('card-craft-auth-token')
+
+  // Auto store Bearer token in each axios queries
+  if (token) {
+    userStore.updateToken(token)
+    api.interceptors.request.use((config) => {
+      config.headers.Authorization = `Bearer ${userStore.token}`;
+      return config;
+    });
+  }
+
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   app.config.globalProperties.$axios = axios
