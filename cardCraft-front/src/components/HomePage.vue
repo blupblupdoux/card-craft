@@ -1,6 +1,6 @@
 <template>
     <div>
-        Dashboard !
+        Home page !
         {{ userStore.username }}
     </div>
 </template>

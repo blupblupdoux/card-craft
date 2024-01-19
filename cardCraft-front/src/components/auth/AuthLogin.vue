@@ -1,18 +1,18 @@
 <template>
     <div id="loginPage">
-      <h1>Login</h1>
+      <h1>{{ t('auth.loginTitle') }}</h1>
 
       <q-form @submit.prevent.stop="authenticate">
 
         <q-input v-model="form.username" 
-                label="Username" 
+                :label="t('auth.usernameLabel')" 
                 type="text" 
                 required
                 outlined>
         </q-input>
 
         <q-input v-model="form.password" 
-                label="Password" 
+                :label="t('auth.passwordLabel')" 
                 type="password" 
                 required
                 outlined>
@@ -20,10 +20,10 @@
 
         <div v-if="errorMessage" class="form-error-message" style="margin: 0 auto .5rem;">{{ errorMessage }}</div>
 
-        <q-btn type="submit" label="Login" color="primary" />
+        <q-btn type="submit" :label="t('auth.loginTitle')"  color="primary" />
       </q-form>
 
-      <div class="link" @click="router.push({name: 'register'})">You don't have an account? Register for free.</div>
+      <div class="link" @click="router.push({name: 'register'})">{{ t('auth.noAccount') }}</div>
     </div>
 </template>
 
@@ -32,9 +32,11 @@ import { ref, reactive } from 'vue';
 import { api } from 'src/boot/axios'
 import { useUserStore } from 'src/stores/user-store';
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n';
 
 let userStore = useUserStore()
 const router = useRouter()
+const { t } = useI18n()
 
 let form = reactive({
   username: '',

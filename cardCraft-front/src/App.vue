@@ -1,11 +1,20 @@
 <template>
-  <router-view />
+
+  <div id="mainPage">
+    <router-view />
+  </div>
+
+  <nav-menu v-if="route.meta.auth"></nav-menu>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { useUserStore } from './stores/user-store';
+import { useRoute } from 'vue-router';
+import NavMenu from './components/nav/NavMenu.vue';
+
 const userStore = useUserStore()
+const route = useRoute()
 
 onMounted(() => {
   userStore.initialize()
@@ -15,8 +24,8 @@ onMounted(() => {
 
 <style>
 
-#q-app {
-  padding: 0 1rem;
+#mainPage {
+  padding: 1rem 1rem 0;
 }
 
 </style>
