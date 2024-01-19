@@ -4,19 +4,19 @@ const routes = [
     path: '/',
     name: "home",
     meta: { auth: true },
-    component: () => import('components/NavMenu.vue'),
+    component: () => import('components/HomePage.vue'),
   },
   {
     path: '/login',
     name: "login",
     meta: { auth: false },
-    component: () => import('components/AuthLogin.vue'),
+    component: () => import('components/auth/AuthLogin.vue'),
   },
   {
     path: '/register',
     name: "register",
     meta: { auth: false },
-    component: () => import('components/AuthRegister.vue'),
+    component: () => import('components/auth/AuthRegister.vue'),
   },
 
   // Always leave this as last one,
