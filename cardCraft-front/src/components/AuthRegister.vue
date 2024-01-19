@@ -77,7 +77,7 @@ const register = () => {
   console.log(form);
 
   api.post('/api/register', form).then(response => {
-    userStore.authenticate(response.data.data)
+    userStore.authenticate(response.data)
   }).catch(error => {
     errors.value = error?.response?.data?.errors
   })

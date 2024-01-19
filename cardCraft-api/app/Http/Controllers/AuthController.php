@@ -19,10 +19,10 @@ class AuthController extends Controller
         $personalToken = PersonalAccessToken::findToken($bearerToken);
         $user = $personalToken && $personalToken->tokenable ? $personalToken->tokenable : null;
 
-        return (new JsonResource([
+        return response([
             'user' => $user,
             'env' => env('APP_ENV')
-        ]))->response()->setStatusCode(Response::HTTP_OK);
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function register(Request $request) {
@@ -43,11 +43,11 @@ class AuthController extends Controller
             'email' => $data['email']
         ]);
 
-        return (new JsonResource([
+        return response([
             'message' => 'Successful registeration.',
             'user' => $newUser,
             'token' => $newUser->createToken(uniqid())->plainTextToken
-        ]))->response()->setStatusCode(Response::HTTP_OK);
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function authenticate(Request $request) {
@@ -65,10 +65,10 @@ class AuthController extends Controller
 
         $user = User::where('username', $request->username)->first();
 
-        return (new JsonResource([
+        return response([
             'message' => 'Successful authentication.',
             'user' => $user,
             'token' => $user->createToken(uniqid())->plainTextToken
-        ]))->response()->setStatusCode(Response::HTTP_OK);
+        ])->setStatusCode(Response::HTTP_OK);
     }
 }

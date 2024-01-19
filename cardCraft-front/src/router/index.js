@@ -31,10 +31,8 @@ export default route(function (/* { store, ssrContext } */) {
 
     const userStore = useUserStore()
 
-    // Will be executed only on app first load (ex: refresh, etc...) 
-    // but not on app navigation (click on nav link, etc...)
-    if (from === START_LOCATION) {
-      await userStore.initialize()
+    if(to.meta.auth && !userStore.token) {
+      next({name: 'login'})
     }
 
     next()

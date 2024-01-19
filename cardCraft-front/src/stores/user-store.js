@@ -24,18 +24,14 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem('card-craft-auth-token', payload)
     },
     initialize() {
-      return new Promise((resolve, reject) => {
+      // Initialize CSRF token
+      api.get('/sanctum/csrf-cookie').then(() => {
 
-        // Initialize CSRF token
-        api.get('/sanctum/csrf-cookie').then(() => {
-
-          // Load initial data
-          api.get('/api/initialize')
-            .then(response => {
-              this.updateUser(response.data.data.user)
-              resolve()
-            })
-        })
+        // Load initial data
+        api.get('/api/initialize')
+          .then(response => {
+            this.updateUser(response.data.user)
+          })
       })
     },
     authenticate(payload) {
