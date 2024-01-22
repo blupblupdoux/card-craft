@@ -6,9 +6,13 @@ export default {
     submitBtn: 'Soumettre'
   },
   nav: {
+    drawerTitle: 'Bonjour',
     homeBtn: 'Accueil',
     decksBtn: 'Cartes',
     statsBtn: 'Stats',
+    profileBtn: 'Profil',
+    tagsBtn: 'Tags',
+    logoutBtn: 'Deconnexion',
     otherBtn: 'Autre',
   },
   auth: {

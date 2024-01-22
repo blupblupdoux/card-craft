@@ -1,14 +1,16 @@
 <template>
 	<div id="navMenu">
-
-		<div v-for="(item, index) in navMenuItems" :key="index" class="nav-menu-item">
-			<nav-menu-item
-				v-model="drawerOpen"
-				:data="item">
-			</nav-menu-item>
-		</div>
+		<nav-menu-item
+			v-for="(item, index) in navMenuItems"
+			v-model="drawerOpen"
+			:data="item"
+			:key="index">
+		</nav-menu-item>
 		
-		<nav-menu-drawer v-model="drawerOpen" :nav-items="navItems"></nav-menu-drawer>
+		<nav-menu-drawer 
+			v-model="drawerOpen" 
+			:nav-items="navItems">
+		</nav-menu-drawer>
 	</div>
 </template>
 
@@ -26,9 +28,9 @@ const navItems = ref([
 	{label: t('nav.decksBtn'), url: '/decks', click: null, icon: 'style', navMenu: true},
 	{label: t('nav.statsBtn'), url: '/stats', click: null, icon: 'o_assessment', navMenu: true},
 	{label: t('nav.otherBtn'), url: null, click: 'drawer', icon: 'more_horiz', navMenu: true},
-	{label: 'profile', url: '/profile', click: null, icon: '', navMenu: false},
-	{label: 'tags', url: '/tags', click: null, icon: '', navMenu: false},
-	{label: 'logout', url: null, click: 'logout', icon: '', navMenu: false},
+	{label: t('nav.profileBtn'), url: '/profile', click: null, icon: 'person', navMenu: false},
+	{label: t('nav.tagsBtn'), url: '/tags', click: null, icon: 'label', navMenu: false},
+	{label: t('nav.logoutBtn'), url: null, click: 'logout', icon: 'logout', navMenu: false},
 ])
 const navMenuItems = computed(() => navItems.value.filter(item => item.navMenu))
 
@@ -48,11 +50,5 @@ const navMenuItems = computed(() => navItems.value.filter(item => item.navMenu))
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.nav-menu-item {
-	width: 25%;
-	text-align: center;
-	text-decoration: none;
 }
 </style>

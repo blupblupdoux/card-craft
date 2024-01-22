@@ -23,19 +23,45 @@ const onNavItemClick = () => {
  }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../css/quasar.variables.scss';
-.q-icon {
+
+
+// Default design
+.nav-menu-item {
+	width: 25%;
+	text-align: center;
+	text-decoration: none;
+
+	.q-icon {
 	color: $light;
 }
 
-.nav-menu-item-label {
-	font-size: x-small;
-	color: $light;
-	font-weight: bold;
+	.nav-menu-item-label {
+		font-size: x-small;
+		color: $light;
+		font-weight: bold;
+	}
 }
 
-.router-link-active .q-icon, .router-link-active .nav-menu-item-label {
+// Drawer design
+#navDrawerMain {
+	.nav-menu-item {
+		width: 100%;
+		text-align: left;
+		display: flex;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		.nav-menu-item-label {
+			font-size: medium;
+			margin-left: 1rem;
+		}
+	}
+}
+
+.nav-menu-item.router-link-active .q-icon, 
+.nav-menu-item.router-link-active .nav-menu-item-label {
 	color: $primary;
 }
 
