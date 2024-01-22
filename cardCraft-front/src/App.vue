@@ -4,7 +4,7 @@
       <router-view />
     </div>
 
-    <nav-menu v-if="route.meta.auth"></nav-menu>
+    <nav-menu v-if="route.meta.navMenu"></nav-menu>
   </q-layout>
 </template>
 
@@ -22,11 +22,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style>
-
-#mainPage {
-  padding: 1rem 1rem 0;
-}
-
-</style>
