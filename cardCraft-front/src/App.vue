@@ -1,10 +1,11 @@
 <template>
+  <q-layout>
+    <div id="mainPage">
+      <router-view />
+    </div>
 
-  <div id="mainPage">
-    <router-view />
-  </div>
-
-  <nav-menu v-if="route.meta.auth"></nav-menu>
+    <nav-menu v-if="route.meta.auth"></nav-menu>
+  </q-layout>
 </template>
 
 <script setup>
