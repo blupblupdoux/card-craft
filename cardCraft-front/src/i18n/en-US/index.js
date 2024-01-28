@@ -28,5 +28,14 @@ export default {
   },
   home: {
     
+  },
+  decks: {
+    addDeck: 'New deck',
+    createTitle: 'Create new deck',
+    editTitle: 'Edit deck informations',
+    titleLabel: 'Title',
+    descriptionLabel: 'Description',
+    colorLabel: 'Color',
+    currentColor: 'Current color',
   }
 }

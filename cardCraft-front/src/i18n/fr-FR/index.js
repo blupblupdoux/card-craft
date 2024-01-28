@@ -28,5 +28,14 @@ export default {
   },
   home: {
     
+  },
+  decks: {
+    addDeck: 'Nouveau groupe de cartes',
+    createTitle: 'Créer un nouveau groupe de cartes',
+    editTitle: 'Modifer les informations du groupe de cartes',
+    titleLabel: 'Title',
+    descriptionLabel: 'Description',
+    colorLabel: 'Couleur',
+    currentColor: 'Couleur actuelle',
   }
 }

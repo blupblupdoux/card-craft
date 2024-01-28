@@ -1,5 +1,5 @@
 <template>
-    <div id="registerPage">
+    <div id="registerPage" class="page-padding-default">
       <h1>{{ t('auth.registerTitle') }}</h1>
 
       <q-form @submit.prevent.stop="register">
