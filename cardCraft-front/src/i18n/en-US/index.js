@@ -33,7 +33,7 @@ export default {
     addDeck: 'New deck',
     createTitle: 'Create new deck',
     editTitle: 'Edit deck informations',
-    titleLabel: 'Title',
+    nameLabel: 'Title',
     descriptionLabel: 'Description',
     colorLabel: 'Color',
     currentColor: 'Current color',
