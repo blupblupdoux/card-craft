@@ -17,12 +17,14 @@
             <label class="label-default">{{ t('decks.nameLabel') }}</label>
             <q-input v-model="form.name" 
                 type="text"
+                required
                 outlined>
             </q-input>
 
             <label class="label-default">{{ t('decks.descriptionLabel') }}</label>
             <q-input v-model="form.description" 
                 type="textarea"
+                rows="4"
                 outlined>
             </q-input>
 
@@ -38,10 +40,14 @@ import HeaderDefault from '../common/HeaderDefault.vue'
 import { getCssVar } from 'quasar'
 import { api } from 'src/boot/axios';
 import { useUserStore } from 'src/stores/user-store';
+import { useDecksStore } from 'src/stores/decks-store';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({id: String})
 const { t } = useI18n()
 const userStore = useUserStore()
+const decksStore = useDecksStore()
+const router = useRouter()
 
 let form = reactive({
     name: '',
@@ -57,10 +63,8 @@ const submit = () => {
 
     api.post('/api/decks/create', form)
     .then(response => {
-        console.log(response.data);
-
-        // add to decks list (need to create new store)
-        // redirect to decks list page
+        decksStore.addDeck(response.data)
+        router.push('/decks')
     })
     .catch(error => {
         console.error(error)
