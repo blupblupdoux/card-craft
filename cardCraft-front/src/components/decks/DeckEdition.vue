@@ -35,7 +35,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { reactive, computed } from 'vue';
+import { reactive, computed, onMounted } from 'vue';
 import HeaderDefault from '../common/HeaderDefault.vue'
 import { getCssVar } from 'quasar'
 import { api } from 'src/boot/axios';
@@ -49,21 +49,37 @@ const userStore = useUserStore()
 const decksStore = useDecksStore()
 const router = useRouter()
 
+const title = computed(() => props.id === undefined ? t('decks.createTitle') : t('decks.editTitle'))
 let form = reactive({
     name: '',
     description: '',
     color: getCssVar('primary')
 })
 
-const title = computed(() => props.id === undefined ? t('decks.createTitle') : t('decks.editTitle'))
+onMounted(() => {
+    // If edit deck pre-fill infos
+    if (props.id) {
+        const deck = decksStore.getDeck(props.id)
+        form.id = deck.id
+        form.name = deck.name
+        form.description = deck.description
+        form.color = deck.color
+    }
+})
 
 const submit = () => {
-
     form.user_id = userStore.id
+    const url = props.id ? '/api/decks/edit' : '/api/decks/create'
 
-    api.post('/api/decks/create', form)
-    .then(response => {
-        decksStore.addDeck(response.data)
+    api.post(url, form)
+        .then(response => {
+
+            if (props.id) {
+                decksStore.updateDeck(form)
+            } else {
+                decksStore.addDeck(response.data)
+            }
+        
         router.push('/decks')
     })
     .catch(error => {
