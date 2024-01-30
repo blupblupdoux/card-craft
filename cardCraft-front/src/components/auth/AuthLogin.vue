@@ -1,5 +1,5 @@
 <template>
-    <div id="loginPage">
+    <div id="loginPage" class="page-padding-default">
       <h1>{{ t('auth.loginTitle') }}</h1>
 
       <q-form @submit.prevent.stop="authenticate">

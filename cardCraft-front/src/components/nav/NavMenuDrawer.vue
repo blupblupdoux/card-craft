@@ -9,7 +9,7 @@
   >
 
     <!-- HEADER -->
-    <div id="navDrawerHeader">
+    <div id="navDrawerHeader" class="header-primary">
         <div>{{ t('nav.drawerTitle') + ' ' + name }}</div>
     </div>
 
@@ -47,14 +47,10 @@ const name = computed(() => userStore.name ?? userStore.username)
 }
 
 #navDrawerHeader {
-    height: 150px;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    background-color: $primary;
-    color: white;
-    font-size: x-large;
 }
 
 #navDrawerMain {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DecksController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ Route::get('/initialize', [AuthController::class, 'initialize']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/authenticate', [AuthController::class, 'authenticate']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Authenticated routes
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::get('/decks', [DecksController::class, 'all']);
+    Route::post('/decks/create', [DecksController::class, 'create']);
+    Route::post('/decks/edit', [DecksController::class, 'update']);
 });
