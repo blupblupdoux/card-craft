@@ -63,4 +63,10 @@ onMounted(() => {
     align-items:center;
     justify-content: space-between
 }
+
+#decksList {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 </style>
