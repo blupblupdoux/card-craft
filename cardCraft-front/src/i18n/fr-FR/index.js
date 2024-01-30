@@ -3,7 +3,8 @@
 
 export default {
   common: {
-    submitBtn: 'Soumettre'
+    submitBtn: 'Soumettre',
+    search: 'Rechercher',
   },
   nav: {
     drawerTitle: 'Bonjour',
@@ -30,7 +31,9 @@ export default {
     
   },
   decks: {
-    addDeck: 'Nouveau groupe de cartes',
+    addDeck: 'Creer',
+    tagBtn: 'Tag',
+    sortBtn: 'Trier',
     createTitle: 'Créer un nouveau groupe de cartes',
     editTitle: 'Modifer les informations du groupe de cartes',
     nameLabel: 'Title',
