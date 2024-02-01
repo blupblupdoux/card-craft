@@ -1,5 +1,5 @@
 <template>
-    <div class="deck-card" :style="'border: 2px solid '+ deck.color +';'">
+    <div @click="router.push('/deck/' + deck.id + '/edit')" class="deck-card" :style="'border: 2px solid '+ deck.color +';'">
         <!-- Card header -->
         <div class="deck-card-header" :style="'background-color: ' + deck.color + ';'"></div>
 
@@ -12,10 +12,10 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({deck: Object})
-const { t } = useI18n()
+const router = useRouter()
 </script>
 
 <style>
