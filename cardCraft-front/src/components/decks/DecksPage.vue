@@ -52,7 +52,10 @@ const sort = reactive([
 ])
 
 const filteredDecks = computed(() => {
-    const decks = query.value !== '' ? decksStore.decksList.filter(deck => deck.name.includes(query)) : decksStore.decksList
+    let decks = decksStore.decksList
+    if (query.value !== '') { 
+        decks = decksStore.decksList.filter(deck => deck.name.toLowerCase().includes(query.value.toLowerCase()))
+    }
     return sortDecks(decks)
 })
 
