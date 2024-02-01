@@ -5,7 +5,7 @@
         <div id="decksFilters">
             <q-btn icon="add" to="/deck/create" :label="t('decks.addDeck')" size="md" color="primary" />
             <div style="margin-top: 3px;">
-                <q-btn icon="tag" :label="t('decks.tagBtn')" size="sm" outline rounded color="dark" style="margin-right: 10px;" />
+                <!-- <q-btn icon="tag" :label="t('decks.tagBtn')" size="sm" outline rounded color="dark" style="margin-right: 10px;" /> -->
 
                 <q-btn-dropdown icon="sort" :label="t('decks.sortBtn')" size="sm" outline rounded color="dark">
                     <q-list>

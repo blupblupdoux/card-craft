@@ -11,6 +11,7 @@
 @import '../../css/quasar.variables.scss';
 
 #navMenu {
+    background-color: white;
     border-top: solid 1px $light;
     height: 62px;
     position: fixed;
