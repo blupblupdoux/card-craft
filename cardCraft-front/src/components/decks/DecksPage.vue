@@ -76,18 +76,6 @@ const sortDecks = (decks) => {
     }
     return decks
 }
-
-onMounted(() => {
-    if (decksStore.decksList.length === 0) {
-        api.get('/api/decks')
-        .then(response => {
-            decksStore.decksList = response.data
-        })
-        .catch(error => {
-            console.error(error)
-        }) 
-    }
-})
 </script>
 
 <style lang="scss">

@@ -13,13 +13,16 @@ import { onMounted, computed } from 'vue';
 import { useUserStore } from './stores/user-store';
 import { useRoute } from 'vue-router';
 import NavMenu from './components/nav/NavMenu.vue';
+import { useDecksStore } from './stores/decks-store';
 
 const userStore = useUserStore()
+const decksStore = useDecksStore()
 const route = useRoute()
 const navbarPaddingBottom = computed(() => route.meta.navMenu ? 'navbar-padding-bottom' : '')
 
 onMounted(() => {
   userStore.initialize()
+  decksStore.fetchDecks()
 })
 
 </script>

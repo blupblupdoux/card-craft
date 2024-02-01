@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { api } from 'src/boot/axios';
 
 export const useDecksStore = defineStore('decks', {
   state: () => ({
@@ -8,6 +9,17 @@ export const useDecksStore = defineStore('decks', {
     //
   },
   actions: {
+    fetchDecks() {
+      if (this.decksList.length === 0) {
+        api.get('/api/decks')
+        .then(response => {
+            this.decksList = response.data
+        })
+        .catch(error => {
+            console.error(error)
+        }) 
+      }
+    },
     getDeck(id) {
       const deck = this.decksList.filter(deck => deck.id == id)
       return deck.length > 0 ? deck[0] : null
