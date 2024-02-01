@@ -3,7 +3,8 @@
 
 export default {
   common: {
-    submitBtn: 'Submit'
+    submitBtn: 'Submit',
+    search: 'Search',
   },
   nav: {
     drawerTitle: 'Hello',
@@ -31,6 +32,13 @@ export default {
   },
   decks: {
     addDeck: 'New deck',
+    tagBtn: 'Tag',
+    sortBtn: 'Sort',
+    sortAsc: 'Alphabetical A-Z',
+    sortDesc: 'Alphabetical Z-A',
+    sortCreatedNew: 'Created date (newest)',
+    sortCreatedOld: 'Created date (older)',
+
     createTitle: 'Create new deck',
     editTitle: 'Edit deck informations',
     nameLabel: 'Title',

@@ -75,7 +75,7 @@ const submit = () => {
         .then(response => {
 
             if (props.id) {
-                decksStore.updateDeck(form)
+                decksStore.updateDeck(response.data)
             } else {
                 decksStore.addDeck(response.data)
             }

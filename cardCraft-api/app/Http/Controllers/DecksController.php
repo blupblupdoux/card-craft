@@ -41,6 +41,6 @@ class DecksController extends Controller
 
         Decks::where('id', $validated['id'])->update($validated);
 
-        return response()->setStatusCode(Response::HTTP_CREATED);
+        return response(Decks::find($validated['id']))->setStatusCode(Response::HTTP_OK);
     }
 }
