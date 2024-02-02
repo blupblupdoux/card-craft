@@ -13,10 +13,10 @@ export const useDecksStore = defineStore('decks', {
       if (this.decksList.length === 0) {
         api.get('/api/decks')
         .then(response => {
-            this.decksList = response.data
+          this.decksList = response.data
         })
         .catch(error => {
-            console.error(error)
+          console.error(error)
         }) 
       }
     },

@@ -35,8 +35,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { computed, reactive, ref, onMounted } from 'vue';
-import { api } from 'src/boot/axios';
+import { computed, reactive, ref } from 'vue';
 import { useDecksStore } from 'src/stores/decks-store';
 import DeckCard from './DeckCard.vue';
 

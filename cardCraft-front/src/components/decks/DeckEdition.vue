@@ -73,7 +73,6 @@ const submit = () => {
 
     api.post(url, form)
         .then(response => {
-
             if (props.id) {
                 decksStore.updateDeck(response.data)
             } else {
