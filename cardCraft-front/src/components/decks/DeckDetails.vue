@@ -1,5 +1,5 @@
 <template>
-    <div id="deckDetails" v-if="'id' in deck">
+    <div id="deckDetails" v-if="deck && ('id' in deck)">
          <div>
             <!-- Header -->
             <div class="header-primary">
@@ -26,12 +26,23 @@ import { useI18n } from 'vue-i18n';
 import { useDecksStore } from 'src/stores/decks-store';
 import DeckDetailsActions from './DeckDetailsActions.vue';
 import BackArrow from '../common/BackArrow.vue';
+import { reactive, onMounted } from 'vue';
 
 const props = defineProps({ id: String })
 const { t } = useI18n()
 const decksStore = useDecksStore()
 
-let deck = decksStore.getDeck(props.id)
+let deck = reactive({});
+
+const getDeck = async () => {
+    const result = await decksStore.getDeck(props.id)
+    Object.assign(deck, result);
+}
+
+onMounted(() => {
+    getDeck()
+})
+
 
 </script>
 

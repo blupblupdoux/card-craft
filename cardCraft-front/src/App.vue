@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <div id="mainPage" :class="navbarPaddingBottom">
+    <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
       <router-view />
     </div>
 
@@ -9,22 +9,18 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue';
-import { useUserStore } from './stores/user-store';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useMainStore } from './stores/main-store';
+import { useUserStore } from './stores/user-store';
 import NavMenu from './components/nav/NavMenu.vue';
-import { useDecksStore } from './stores/decks-store';
 
-const userStore = useUserStore()
-const decksStore = useDecksStore()
 const route = useRoute()
+const mainStore = useMainStore()
+const userStore = useUserStore()
 const navbarPaddingBottom = computed(() => route.meta.navMenu ? 'navbar-padding-bottom' : '')
 
-onMounted(() => {
-  userStore.initialize()
-  decksStore.fetchDecks()
-})
-
+mainStore.initialize()
 </script>
 
 <style>

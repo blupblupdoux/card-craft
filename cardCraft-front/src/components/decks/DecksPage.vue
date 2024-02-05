@@ -50,6 +50,9 @@ const sort = reactive([
     { key: 'created-old', label: t('decks.sortCreatedOld') }
 ])
 
+// Decks initalization
+decksStore.fetchDecks()
+
 const filteredDecks = computed(() => {
     let decks = decksStore.decksList
     if (query.value !== '') { 

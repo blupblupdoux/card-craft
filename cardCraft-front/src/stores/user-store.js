@@ -23,17 +23,6 @@ export const useUserStore = defineStore('user', {
       this.token = payload
       localStorage.setItem('card-craft-auth-token', payload)
     },
-    initialize() {
-      // Initialize CSRF token
-      api.get('/sanctum/csrf-cookie').then(() => {
-
-        // Load initial data
-        api.get('/api/initialize')
-          .then(response => {
-            this.updateUser(response.data.user)
-          })
-      })
-    },
     authenticate(payload) {
       this.updateUser(payload.user)
       this.updateToken(payload.token)
