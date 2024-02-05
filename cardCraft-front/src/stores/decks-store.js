@@ -19,13 +19,14 @@ export const useDecksStore = defineStore('decks', {
 
       if (deck.length === 0) {
         const response = await api.get('/api/deck/' + id)
+        this.addDeck(response.data)
         return response.data
       }
 
       return deck[0]
     },
     addDeck(newDeck) {
-      this.decksList.shift(newDeck)
+      this.decksList.unshift(newDeck)
     },
     updateDeck(newDeck) {
       this.decksList = this.decksList.map(deck => deck.id == newDeck.id ? newDeck : deck);

@@ -56,10 +56,10 @@ let form = reactive({
     color: getCssVar('primary')
 })
 
-onMounted(() => {
+onMounted(async () => {
     // If edit deck pre-fill infos
     if (props.id) {
-        const deck = decksStore.getDeck(props.id)
+        const deck = await decksStore.getDeck(props.id)
         form.id = deck.id
         form.name = deck.name
         form.description = deck.description
