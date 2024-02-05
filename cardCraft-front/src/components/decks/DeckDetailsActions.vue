@@ -16,6 +16,7 @@ import NavMenuItem from '../nav/NavMenuItem.vue';
 
 const props = defineProps({ deck: Object })
 const { t } = useI18n()
+
 const navItems = ref([
     { label: t('decks.actionPlay'), url: '/decks', click: null, icon: 'r_play_arrow' },
     { label: t('decks.actionAddCard'), url: '', click: null, icon: 'add' },

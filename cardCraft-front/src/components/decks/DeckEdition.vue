@@ -1,6 +1,6 @@
 <template>
     <div id="deckEdition">
-        <header-default :text="title" route="/decks"></header-default>
+        <header-default :text="title" :route="previousroute"></header-default>
 
         <q-form @submit.prevent.stop="submit" class="page-padding-default">
             
@@ -50,6 +50,7 @@ const decksStore = useDecksStore()
 const router = useRouter()
 
 const title = computed(() => props.id === undefined ? t('decks.createTitle') : t('decks.editTitle'))
+const previousroute = computed(() => props.id === undefined ? '/decks' : '/deck/' + props.id )
 let form = reactive({
     name: '',
     description: '',
