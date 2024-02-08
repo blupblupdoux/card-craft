@@ -49,5 +49,8 @@ export default {
     actionPlay: 'Apprendre',
     actionAddCard: 'Ajouter carte',
     actionEdit: 'Modifier infos'
+  },
+  flashcards: {
+    totalFlashcard: 'Nombres de cartes : {number}'
   }
 }

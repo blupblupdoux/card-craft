@@ -14,7 +14,8 @@
 
             <!-- Cards list -->
             <div class="deck-details-cards page-padding-default">
-
+                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', {number: 1}) }}</div>
+                <flashcard-card></flashcard-card>
             </div>
         </div>
         <deck-details-actions :deck="deck"></deck-details-actions>  
@@ -22,15 +23,16 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
 import { useDecksStore } from 'src/stores/decks-store';
+import { reactive, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import DeckDetailsActions from './DeckDetailsActions.vue';
 import BackArrow from '../common/BackArrow.vue';
-import { reactive, onMounted } from 'vue';
+import FlashcardCard from '../flashcards/FlashcardCard.vue'
 
 const props = defineProps({ id: String })
-const { t } = useI18n()
 const decksStore = useDecksStore()
+const { t } = useI18n()
 
 let deck = reactive({});
 
@@ -69,6 +71,13 @@ onMounted(() => {
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         box-shadow: 0px -2px 17px 0px rgba(0,0,0,0.25);
+    }
+    .deck-details-total-cards {
+        color: $primary;
+        font-size: large;
+        font-weight: bold;
+        margin-left: .5rem;
+        margin-bottom: 1rem;
     }
 }
 </style>
