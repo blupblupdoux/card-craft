@@ -5,7 +5,7 @@
         <q-form @submit.prevent.stop="submit" class="page-padding-default">
 
                 <label class="label-default">{{ t('flashcards.questionLabel') }}</label>
-                <q-input v-model="form.question" 
+                <q-input v-model="form.recto" 
                     type="textarea"
                     rows="4"
                     required
@@ -13,7 +13,7 @@
                 </q-input>
 
                 <label class="label-default">{{ t('flashcards.answerLabel') }}</label>
-                <q-input v-model="form.answer" 
+                <q-input v-model="form.verso" 
                     type="textarea"
                     rows="4"
                     required
@@ -28,20 +28,34 @@
 <script setup>
 import { computed, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { api } from 'src/boot/axios';
 import HeaderDefault from '../common/HeaderDefault.vue';
 
-const props = defineProps({ deckId: String, id: String })
+const props = defineProps({ deckId: String, flashcardId: String })
 const { t } = useI18n()
 
-const title = computed(() => props.id === undefined ? t('flashcards.createTitle') : t('flashcards.editTitle'))
+const title = computed(() => props.flashcardId === undefined ? t('flashcards.createTitle') : t('flashcards.editTitle'))
 let form = reactive({
-    question: '',
-    answer: ''
+    deck_id: props.deckId,
+    recto: '',
+    verso: ''
 })
 
 const submit = () => {
-    console.log('SUBMIT')
-    console.log(form)
+    const url = props.flashcardId ? '/api/flashcard/edit' : '/api/flashcard/create'
+
+    api.post(url, form)
+        .then(response => {
+            console.log(response.data)
+            if (props.id) {
+                console.log('EDIT');
+            } else {
+                console.log('ADD');
+            }
+
+            // router.push('/decks')
+        })
+        .catch(error => console.error(error))
 }
 
 </script>

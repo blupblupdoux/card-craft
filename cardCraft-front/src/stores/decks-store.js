@@ -14,16 +14,9 @@ export const useDecksStore = defineStore('decks', {
       .then(response => this.decksList = response.data)
       .catch(error => console.error(error)) 
     },
-    async getDeck(id) {
+    getDeck(id) {
       const deck = this.decksList.filter(deck => deck.id == id)
-
-      if (deck.length === 0) {
-        const response = await api.get('/api/deck/' + id)
-        this.addDeck(response.data)
-        return response.data
-      }
-
-      return deck[0]
+      return deck.length > 0 ? deck[0] : null
     },
     addDeck(newDeck) {
       this.decksList.unshift(newDeck)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Decks;
+use App\Models\Deck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,13 +11,13 @@ class DecksController extends Controller
 {
     public function all()
     {
-        $decks = Decks::where('user_id', Auth::id())->get();
+        $decks = Deck::where('user_id', Auth::id())->get();
         return response($decks)->setStatusCode(Response::HTTP_OK);
     }
 
     public function find($id)
     {
-        return response(Decks::find($id))->setStatusCode(Response::HTTP_OK);
+        return response(Deck::find($id)->load('flashcards'))->setStatusCode(Response::HTTP_OK);
     }
 
     public function create(Request $request)
@@ -29,7 +29,7 @@ class DecksController extends Controller
             'color' => 'string|required|size:7|starts_with:#'
         ]);
 
-        $newDeck = Decks::create($validated);
+        $newDeck = Deck::create($validated);
 
         return response($newDeck)->setStatusCode(Response::HTTP_CREATED);
     }
@@ -44,8 +44,8 @@ class DecksController extends Controller
             'color' => 'string|required|size:7|starts_with:#'
         ]);
 
-        Decks::where('id', $validated['id'])->update($validated);
+        Deck::where('id', $validated['id'])->update($validated);
 
-        return response(Decks::find($validated['id']))->setStatusCode(Response::HTTP_OK);
+        return response(Deck::find($validated['id']))->setStatusCode(Response::HTTP_OK);
     }
 }

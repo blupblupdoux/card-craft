@@ -25,38 +25,47 @@ const routes = [
     component: () => import('components/decks/DecksPage.vue')
   },
   {
-    path: '/deck/:id',
-    name: "deckDetails",
-    meta: { auth: true, navMenu: false },
-    props: true,
-    component: () => import('components/decks/DeckDetails.vue')
-  },
-  {
     path: '/deck/create',
     name: "deckCreate",
     meta: { auth: true, navMenu: false },
     component: () => import('components/decks/DeckEdition.vue')
   },
   {
-    path: '/deck/:id/edit',
-    name: "deckEdit",
-    meta: { auth: true, navMenu: false },
+    path: '/deck/:deckId',
     props: true,
-    component: () => import('components/decks/DeckEdition.vue')
+    component: () => import('components/decks/DeckParent.vue'),
+    children: [
+      {
+        path: '',
+        name: "deckDetails",
+        meta: { auth: true, navMenu: false },
+        props: true,
+        component: () => import('components/decks/DeckDetails.vue')
+      },
+      {
+        path: 'edit',
+        name: "deckEdit",
+        meta: { auth: true, navMenu: false },
+        props: true,
+        component: () => import('components/decks/DeckEdition.vue')
+      },
+      {
+        path: 'flashcard/create',
+        name: "flashcardCreate",
+        meta: { auth: true, navMenu: false },
+        props: true,
+        component: () => import('components/flashcards/FlashcardEdition.vue')
+      },
+      {
+        path: 'flashcard/:flashcardId/edit',
+        name: "flashcardEdit",
+        meta: { auth: true, navMenu: false },
+        props: true,
+        component: () => import('components/flashcards/FlashcardEdition.vue')
+      },
+    ]
   },
-  {
-    path: '/deck/:deckId/flashcard/create',
-    name: "flashcardCreate",
-    meta: { auth: true, navMenu: false },
-    component: () => import('components/flashcards/FlashcardEdition.vue')
-  },
-  {
-    path: '/deck/:deckId/flashcard/:id/edit',
-    name: "flashcardEdit",
-    meta: { auth: true, navMenu: false },
-    props: true,
-    component: () => import('components/flashcards/FlashcardEdition.vue')
-  },
+  
 
   // Always leave this as last one,
   // but you can also remove it
