@@ -44,6 +44,19 @@ const routes = [
     props: true,
     component: () => import('components/decks/DeckEdition.vue')
   },
+  {
+    path: '/deck/:deckId/flashcard/create',
+    name: "flashcardCreate",
+    meta: { auth: true, navMenu: false },
+    component: () => import('components/flashcards/FlashcardEdition.vue')
+  },
+  {
+    path: '/deck/:deckId/flashcard/:id/edit',
+    name: "flashcardEdit",
+    meta: { auth: true, navMenu: false },
+    props: true,
+    component: () => import('components/flashcards/FlashcardEdition.vue')
+  },
 
   // Always leave this as last one,
   // but you can also remove it
