@@ -35,8 +35,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { computed, reactive, ref, onMounted } from 'vue';
-import { api } from 'src/boot/axios';
+import { computed, reactive, ref } from 'vue';
 import { useDecksStore } from 'src/stores/decks-store';
 import DeckCard from './DeckCard.vue';
 
@@ -50,6 +49,9 @@ const sort = reactive([
     { key: 'created-new', label: t('decks.sortCreatedNew') },
     { key: 'created-old', label: t('decks.sortCreatedOld') }
 ])
+
+// Decks initalization
+decksStore.fetchDecks()
 
 const filteredDecks = computed(() => {
     let decks = decksStore.decksList
@@ -76,18 +78,6 @@ const sortDecks = (decks) => {
     }
     return decks
 }
-
-onMounted(() => {
-    if (decksStore.decksList.length === 0) {
-        api.get('/api/decks')
-        .then(response => {
-            decksStore.decksList = response.data
-        })
-        .catch(error => {
-            console.error(error)
-        }) 
-    }
-})
 </script>
 
 <style lang="scss">

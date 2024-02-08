@@ -26,6 +26,7 @@ Route::post('/authenticate', [AuthController::class, 'authenticate']);
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/decks', [DecksController::class, 'all']);
+    Route::get('/deck/{id}', [DecksController::class, 'find']);
     Route::post('/decks/create', [DecksController::class, 'create']);
     Route::post('/decks/edit', [DecksController::class, 'update']);
 });

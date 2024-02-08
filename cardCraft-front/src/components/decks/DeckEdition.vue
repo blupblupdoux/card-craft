@@ -1,6 +1,6 @@
 <template>
     <div id="deckEdition">
-        <header-default :text="title" route="/decks"></header-default>
+        <header-default :text="title" :route="previousroute"></header-default>
 
         <q-form @submit.prevent.stop="submit" class="page-padding-default">
             
@@ -50,16 +50,17 @@ const decksStore = useDecksStore()
 const router = useRouter()
 
 const title = computed(() => props.id === undefined ? t('decks.createTitle') : t('decks.editTitle'))
+const previousroute = computed(() => props.id === undefined ? '/decks' : '/deck/' + props.id )
 let form = reactive({
     name: '',
     description: '',
     color: getCssVar('primary')
 })
 
-onMounted(() => {
+onMounted(async () => {
     // If edit deck pre-fill infos
     if (props.id) {
-        const deck = decksStore.getDeck(props.id)
+        const deck = await decksStore.getDeck(props.id)
         form.id = deck.id
         form.name = deck.name
         form.description = deck.description
@@ -73,7 +74,6 @@ const submit = () => {
 
     api.post(url, form)
         .then(response => {
-
             if (props.id) {
                 decksStore.updateDeck(response.data)
             } else {

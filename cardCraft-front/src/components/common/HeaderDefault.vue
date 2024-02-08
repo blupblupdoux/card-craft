@@ -22,8 +22,8 @@ const props = defineProps({text: String, route: String})
         position: absolute;
         top: 0;
         left: 0;
-        margin-left: 0.5rem;
-        margin-top: 0.5rem;
+        margin-left: .5rem;
+        margin-top: .5rem;
     }
 
     .header-title {

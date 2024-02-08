@@ -15,6 +15,11 @@ class DecksController extends Controller
         return response($decks)->setStatusCode(Response::HTTP_OK);
     }
 
+    public function find($id)
+    {
+        return response(Decks::find($id))->setStatusCode(Response::HTTP_OK);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([

@@ -45,5 +45,12 @@ export default {
     descriptionLabel: 'Description',
     colorLabel: 'Couleur',
     currentColor: 'Couleur actuelle',
+
+    actionPlay: 'Apprendre',
+    actionAddCard: 'Ajouter carte',
+    actionEdit: 'Modifier infos'
+  },
+  flashcards: {
+    totalFlashcard: 'Nombres de cartes : {number}'
   }
 }

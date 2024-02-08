@@ -45,5 +45,12 @@ export default {
     descriptionLabel: 'Description',
     colorLabel: 'Color',
     currentColor: 'Current color',
+
+    actionPlay: 'Learn',
+    actionAddCard: 'Add card',
+    actionEdit: 'Edit deck'
+  },
+  flashcards: {
+    totalFlashcard: 'Total flashcard: {number}'
   }
 }
