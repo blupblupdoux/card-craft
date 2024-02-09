@@ -14,8 +14,12 @@
 
             <!-- Cards list -->
             <div class="deck-details-cards page-padding-default">
-                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', { number: 1 }) }}</div>
-                <flashcard-card></flashcard-card>
+                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', { number: props.deck.flashcards.length }) }}</div>
+                <flashcard-card v-for="flashcard in props.deck.flashcards" 
+                    :key="'deck-flashcard-card-' + flashcard.id" 
+                    :deck-id="props.deckId" 
+                    :flashcard="flashcard">
+                </flashcard-card>
             </div>
         </div>
         <deck-details-actions :deck="deck"></deck-details-actions>  

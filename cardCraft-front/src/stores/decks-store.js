@@ -29,9 +29,5 @@ export const useDecksStore = defineStore('decks', {
       deckCopy.flashcards.push(newFlashcard)
       this.updateDeck(deckCopy)
     },
-    // getFlashcardFromDeck(deck, flashcardId) {
-    //   const flashcard = deck.flashcards.filter(flashcard => flashcard.id == flashcardId)
-    //   return flashcard.length > 0 ? flashcard[0] : null
-    // }
   },
 });

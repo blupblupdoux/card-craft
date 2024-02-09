@@ -29,12 +29,14 @@
 import { computed, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useDecksStore } from 'src/stores/decks-store';
+import { useRouter } from 'vue-router';
 import { api } from 'src/boot/axios';
 import HeaderDefault from '../common/HeaderDefault.vue';
 
 const props = defineProps({ deckId: String, flashcardId: String, deck: Object })
 const { t } = useI18n()
 const deckStore = useDecksStore()
+const router = useRouter()
 
 const title = computed(() => props.flashcardId === undefined ? t('flashcards.createTitle') : t('flashcards.editTitle'))
 let form = reactive({
@@ -55,7 +57,7 @@ const submit = () => {
                 deckStore.addFlashcardToDeck(props.deck, response.data)
             }
 
-            // router.push('/decks')
+            router.push('/deck/' + props.deckId)
         })
         .catch(error => console.error(error))
 }
