@@ -43,7 +43,7 @@ import { useUserStore } from 'src/stores/user-store';
 import { useDecksStore } from 'src/stores/decks-store';
 import { useRouter } from 'vue-router';
 
-const props = defineProps({deckId: String})
+const props = defineProps({deckId: String, deck: Object})
 const { t } = useI18n()
 const userStore = useUserStore()
 const decksStore = useDecksStore()
@@ -59,8 +59,7 @@ let form = reactive({
 
 onMounted(() => {
     // If edit deck pre-fill infos
-    if (props.deckId) {
-        const deck = decksStore.getDeck(props.deckId)
+    if (props.deckId && ('id' in props.deck)) {
         form.id = deck.id
         form.name = deck.name
         form.description = deck.description

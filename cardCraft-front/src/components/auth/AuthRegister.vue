@@ -75,8 +75,6 @@ let form = reactive({
 let errors = ref({})
 
 const register = () => {
-  
-  console.log(form);
 
   api.post('/api/register', form).then(response => {
     userStore.authenticate(response.data)

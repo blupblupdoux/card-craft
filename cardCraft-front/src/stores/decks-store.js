@@ -21,8 +21,17 @@ export const useDecksStore = defineStore('decks', {
     addDeck(newDeck) {
       this.decksList.unshift(newDeck)
     },
-    updateDeck(newDeck) {
-      this.decksList = this.decksList.map(deck => deck.id == newDeck.id ? newDeck : deck);
-    }
+    updateDeck(updatedDeck) {
+      this.decksList = this.decksList.map(deck => deck.id == updatedDeck.id ? updatedDeck : deck);
+    },
+    addFlashcardToDeck(deck, newFlashcard) {
+      let deckCopy = { ...deck }
+      deckCopy.flashcards.push(newFlashcard)
+      this.updateDeck(deckCopy)
+    },
+    // getFlashcardFromDeck(deck, flashcardId) {
+    //   const flashcard = deck.flashcards.filter(flashcard => flashcard.id == flashcardId)
+    //   return flashcard.length > 0 ? flashcard[0] : null
+    // }
   },
 });

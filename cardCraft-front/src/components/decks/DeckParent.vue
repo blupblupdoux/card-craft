@@ -1,32 +1,34 @@
 <template>
-    <div id="deckParent" v-if="deck || loaded">
-        <router-view></router-view>
+    <div id="deckParent" v-if="loaded">
+        <router-view :deck="deck"></router-view>
     </div>
 </template>
 
 <script setup>
 import { api } from 'src/boot/axios';
 import { useDecksStore } from 'src/stores/decks-store';
-import { onMounted, ref } from 'vue';
+import { computed } from 'vue';
+import { onMounted, reactive } from 'vue';
 
 const props = defineProps({ deckId: String })
 const decksStore = useDecksStore()
-let loaded = ref(false)
 
-let deck = null
+let deck = reactive({})
+const loaded = computed(() => deck && 'id' in deck)
 
 const fetchDeck = () => {
-    deck = decksStore.getDeck(props.deckId);
-    if (!deck) {
+    Object.assign(deck, decksStore.getDeck(props.deckId));
+
+    if (!loaded.value) {
         api.get('/api/deck/' + props.deckId).then(response => {
             decksStore.addDeck(response.data)
-            loaded.value = true
+            Object.assign(deck, decksStore.getDeck(props.deckId));
         })
     }
 }
 
 onMounted(() => { 
-    fetchDeck() // If needed, fetch the deck in DB
+    fetchDeck()
 })
 
 
