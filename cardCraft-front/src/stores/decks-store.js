@@ -24,9 +24,10 @@ export const useDecksStore = defineStore('decks', {
     updateDeck(updatedDeck) {
       this.decksList = this.decksList.map(deck => deck.id == updatedDeck.id ? updatedDeck : deck);
     },
-    addFlashcardToDeck(deck, newFlashcard) {
+    addFlashcardsToDeck(deck, newFlashcards) {
       let deckCopy = { ...deck }
-      deckCopy.flashcards.push(newFlashcard)
+      let currentFlashcards = deckCopy.flashcards ?? []
+      deckCopy.flashcards = [...currentFlashcards, ...newFlashcards]
       this.updateDeck(deckCopy)
     },
   },

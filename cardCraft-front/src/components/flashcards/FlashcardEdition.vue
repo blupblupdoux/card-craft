@@ -35,7 +35,7 @@ import HeaderDefault from '../common/HeaderDefault.vue';
 
 const props = defineProps({ deckId: String, flashcardId: String, deck: Object })
 const { t } = useI18n()
-const deckStore = useDecksStore()
+const decksStore = useDecksStore()
 const router = useRouter()
 
 const title = computed(() => props.flashcardId === undefined ? t('flashcards.createTitle') : t('flashcards.editTitle'))
@@ -54,7 +54,7 @@ const submit = () => {
             if (props.id) {
                 console.log('EDIT');
             } else {
-                deckStore.addFlashcardToDeck(props.deck, response.data)
+                decksStore.addFlashcardsToDeck(props.deck, [response.data])
             }
 
             router.push('/deck/' + props.deckId)

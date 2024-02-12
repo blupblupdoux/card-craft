@@ -1,5 +1,5 @@
 <template>
-    <div id="deckParent" v-if="loaded">
+    <div id="deckParent" v-if="loaded && flashcardlLoaded">
         <router-view :deck="deck"></router-view>
     </div>
 </template>
@@ -15,6 +15,7 @@ const decksStore = useDecksStore()
 
 let deck = reactive({})
 const loaded = computed(() => deck && 'id' in deck)
+const flashcardlLoaded = computed(() => deck && 'flashcards' in deck)
 
 const fetchDeck = () => {
     Object.assign(deck, decksStore.getDeck(props.deckId));
@@ -22,6 +23,11 @@ const fetchDeck = () => {
     if (!loaded.value) {
         api.get('/api/deck/' + props.deckId).then(response => {
             decksStore.addDeck(response.data)
+            Object.assign(deck, decksStore.getDeck(props.deckId));
+        })
+    } else if (!flashcardlLoaded.value) {
+        api.get(`/api/deck/${props.deckId}/flashcards`).then(response => {
+            decksStore.addFlashcardsToDeck(deck, response.data)
             Object.assign(deck, decksStore.getDeck(props.deckId));
         })
     }

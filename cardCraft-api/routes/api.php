@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/deck/create', [DecksController::class, 'create']);
     Route::post('/deck/edit', [DecksController::class, 'update']);
 
+    Route::get('/deck/{deck_id}/flashcards', [FlashcardsController::class, 'flashcardsFromDeck']);
     Route::post('/flashcard/create', [FlashcardsController::class, 'create']);
     // Route::post('/flashcard/edit', [FlashcardsController::class, 'update']);
 });
