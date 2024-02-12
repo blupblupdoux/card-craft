@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/deck/:deckId',
     props: true,
-    component: () => import('components/decks/DeckParent.vue'),
+    component: () => import('components/decks/components/DeckParent.vue'),
     children: [
       {
         path: '',
@@ -41,6 +41,13 @@ const routes = [
         meta: { auth: true, navMenu: false },
         props: true,
         component: () => import('components/decks/DeckDetails.vue')
+      },
+      {
+        path: 'learn',
+        name: "deckLearn",
+        meta: { auth: true, navMenu: false },
+        props: true,
+        component: () => import('components/decks/DeckLearn.vue')
       },
       {
         path: 'edit',
@@ -54,14 +61,14 @@ const routes = [
         name: "flashcardCreate",
         meta: { auth: true, navMenu: false },
         props: true,
-        component: () => import('components/flashcards/FlashcardEdition.vue')
+        component: () => import('components/decks/FlashcardEdition.vue')
       },
       {
         path: 'flashcard/:flashcardId/edit',
         name: "flashcardEdit",
         meta: { auth: true, navMenu: false },
         props: true,
-        component: () => import('components/flashcards/FlashcardEdition.vue')
+        component: () => import('components/decks/FlashcardEdition.vue')
       },
     ]
   },

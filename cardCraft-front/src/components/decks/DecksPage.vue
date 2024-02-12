@@ -37,7 +37,7 @@
 import { useI18n } from 'vue-i18n';
 import { computed, reactive, ref } from 'vue';
 import { useDecksStore } from 'src/stores/decks-store';
-import DeckCard from './DeckCard.vue';
+import DeckCard from './components/DeckCard.vue';
 
 const { t } = useI18n()
 const decksStore = useDecksStore()

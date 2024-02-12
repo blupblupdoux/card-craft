@@ -12,7 +12,7 @@ const props = defineProps({deckId: String||Integer, flashcard: Object})
 </script>
 
 <style lang="scss">
-@import '../../css/quasar.variables.scss';
+@import '../../../css/quasar.variables.scss';
 
 .flashcard-card {
     display: flex;
