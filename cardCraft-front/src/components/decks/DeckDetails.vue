@@ -1,6 +1,6 @@
 <template>
-    <div id="deckDetails" v-if="deck && ('id' in deck)">
-         <div>
+    <div id="deckDetails">
+        <div>
             <!-- Header -->
             <div class="header-primary">
                 <div class="header-icons">
@@ -14,8 +14,12 @@
 
             <!-- Cards list -->
             <div class="deck-details-cards page-padding-default">
-                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', {number: 1}) }}</div>
-                <flashcard-card></flashcard-card>
+                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', { number: deck.flashcards.length }) }}</div>
+                <flashcard-card v-for="flashcard in deck.flashcards" 
+                    :key="'deck-flashcard-card-' + flashcard.id" 
+                    :deck-id="props.deckId" 
+                    :flashcard="flashcard">
+                </flashcard-card>
             </div>
         </div>
         <deck-details-actions :deck="deck"></deck-details-actions>  
@@ -23,28 +27,18 @@
 </template>
 
 <script setup>
-import { useDecksStore } from 'src/stores/decks-store';
-import { reactive, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useDecksStore } from 'src/stores/decks-store';
+import { reactive } from 'vue';
 import DeckDetailsActions from './DeckDetailsActions.vue';
 import BackArrow from '../common/BackArrow.vue';
 import FlashcardCard from '../flashcards/FlashcardCard.vue'
 
-const props = defineProps({ id: String })
-const decksStore = useDecksStore()
+const props = defineProps({ deckId: String})
 const { t } = useI18n()
+const deckStore = useDecksStore()
 
-let deck = reactive({});
-
-const getDeck = async () => {
-    const result = await decksStore.getDeck(props.id)
-    Object.assign(deck, result);
-}
-
-onMounted(() => {
-    getDeck()
-})
-
+const deck = reactive(deckStore.getDeck(props.deckId))
 
 </script>
 

@@ -43,24 +43,25 @@ import { useUserStore } from 'src/stores/user-store';
 import { useDecksStore } from 'src/stores/decks-store';
 import { useRouter } from 'vue-router';
 
-const props = defineProps({id: String})
+const props = defineProps({deckId: String})
 const { t } = useI18n()
 const userStore = useUserStore()
 const decksStore = useDecksStore()
 const router = useRouter()
 
-const title = computed(() => props.id === undefined ? t('decks.createTitle') : t('decks.editTitle'))
-const previousroute = computed(() => props.id === undefined ? '/decks' : '/deck/' + props.id )
+const isEdition = computed(() => props.deckId !== undefined)
+const title = computed(() => !isEdition.value ? t('decks.createTitle') : t('decks.editTitle'))
+const previousroute = computed(() => !isEdition.value ? '/decks' : '/deck/' + props.deckId )
 let form = reactive({
     name: '',
     description: '',
     color: getCssVar('primary')
 })
 
-onMounted(async () => {
-    // If edit deck pre-fill infos
-    if (props.id) {
-        const deck = await decksStore.getDeck(props.id)
+onMounted(() => {
+    // If edit pre-fill deck infos
+    if (isEdition.value) {
+        const deck = decksStore.getDeck(props.deckId)
         form.id = deck.id
         form.name = deck.name
         form.description = deck.description
@@ -70,11 +71,11 @@ onMounted(async () => {
 
 const submit = () => {
     form.user_id = userStore.id
-    const url = props.id ? '/api/decks/edit' : '/api/decks/create'
+    const url = isEdition.value ? '/api/deck/edit' : '/api/deck/create'
 
     api.post(url, form)
         .then(response => {
-            if (props.id) {
+            if (isEdition.value) {
                 decksStore.updateDeck(response.data)
             } else {
                 decksStore.addDeck(response.data)
@@ -82,9 +83,7 @@ const submit = () => {
         
         router.push('/decks')
     })
-    .catch(error => {
-        console.error(error)
-    })
+    .catch(error => console.error(error))
 }
 
 </script>

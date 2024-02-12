@@ -51,6 +51,10 @@ export default {
     actionEdit: 'Modifier infos'
   },
   flashcards: {
-    totalFlashcard: 'Nombres de cartes : {number}'
+    totalFlashcard: 'Nombres de cartes : {number}',
+    createTitle: 'Créer une nouvelle carte',
+    editTitle: 'Modifier la carte',
+    questionLabel: 'Question (recto de la carte)',
+    answerLabel: 'Réponse (verso de la carte)',
   }
 }

@@ -51,6 +51,10 @@ export default {
     actionEdit: 'Edit deck'
   },
   flashcards: {
-    totalFlashcard: 'Total flashcard: {number}'
+    totalFlashcard: 'Total flashcard: {number}',
+    createTitle: 'Create new flashcard',
+    editTitle: 'Edit flashcard',
+    questionLabel: 'Question (recto of the card)',
+    answerLabel: 'Answer (verso of the card)',
   }
 }

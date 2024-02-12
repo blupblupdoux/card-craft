@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecksController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\FlashcardsController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/decks', [DecksController::class, 'all']);
     Route::get('/deck/{id}', [DecksController::class, 'find']);
-    Route::post('/decks/create', [DecksController::class, 'create']);
-    Route::post('/decks/edit', [DecksController::class, 'update']);
+    Route::post('/deck/create', [DecksController::class, 'create']);
+    Route::post('/deck/edit', [DecksController::class, 'update']);
+
+    Route::get('/deck/{deck_id}/flashcards', [FlashcardsController::class, 'flashcardsFromDeck']);
+    Route::post('/flashcard/create', [FlashcardsController::class, 'create']);
+    Route::post('/flashcard/edit', [FlashcardsController::class, 'update']);
 });
