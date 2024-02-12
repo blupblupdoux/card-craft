@@ -21,6 +21,19 @@ class FlashcardsController extends Controller
         return response($flashcard)->setStatusCode(Response::HTTP_CREATED);
     }
 
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'recto' => 'string|required',
+            'verso' => 'string|required',
+        ]);
+
+        Flashcard::where('id', $validated['id'])->update($validated);
+
+        return response(Flashcard::find($validated['id']))->setStatusCode(Response::HTTP_CREATED);
+    }
+
     public function flashcardsFromDeck($deck_id)
     {
         $flashcards = Flashcard::where('deck_id', $deck_id)->get();

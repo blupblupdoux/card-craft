@@ -1,6 +1,6 @@
 <template>
     <div id="deckParent" v-if="loaded && flashcardlLoaded">
-        <router-view :deck="deck"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 

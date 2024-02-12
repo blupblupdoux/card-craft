@@ -24,10 +24,19 @@ export const useDecksStore = defineStore('decks', {
     updateDeck(updatedDeck) {
       this.decksList = this.decksList.map(deck => deck.id == updatedDeck.id ? updatedDeck : deck);
     },
+    getFlashcardFromDeck(deck, flashcardId) {
+      const flashcard = deck.flashcards.filter(flashcard => flashcard.id == flashcardId)
+      return flashcard.length > 0 ? flashcard[0] : null
+    },
     addFlashcardsToDeck(deck, newFlashcards) {
       let deckCopy = { ...deck }
       let currentFlashcards = deckCopy.flashcards ?? []
       deckCopy.flashcards = [...currentFlashcards, ...newFlashcards]
+      this.updateDeck(deckCopy)
+    },
+    updateFlashcardsFromDeck(deck, updatedFlashcard) {
+      let deckCopy = { ...deck }
+      deckCopy.flashcards = deckCopy.flashcards.map(flashcard => flashcard.id == updatedFlashcard.id ? updatedFlashcard : flashcard);
       this.updateDeck(deckCopy)
     },
   },

@@ -1,7 +1,7 @@
 <template>
     <div class="flashcard-card">
         <div>{{ props.flashcard.recto }}</div>
-        <router-link :to="`deck/${props.deckId}/flashcard/${props.flashcard.id}/edit`" >
+        <router-link :to="`/deck/${props.deckId}/flashcard/${props.flashcard.id}/edit`" >
             <q-icon name="edit" size="30px" color="primary" />
         </router-link>
     </div>

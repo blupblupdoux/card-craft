@@ -14,8 +14,8 @@
 
             <!-- Cards list -->
             <div class="deck-details-cards page-padding-default">
-                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', { number: props.deck.flashcards.length }) }}</div>
-                <flashcard-card v-for="flashcard in props.deck.flashcards" 
+                <div class="deck-details-total-cards">{{ t('flashcards.totalFlashcard', { number: deck.flashcards.length }) }}</div>
+                <flashcard-card v-for="flashcard in deck.flashcards" 
                     :key="'deck-flashcard-card-' + flashcard.id" 
                     :deck-id="props.deckId" 
                     :flashcard="flashcard">
@@ -28,12 +28,17 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { useDecksStore } from 'src/stores/decks-store';
+import { reactive } from 'vue';
 import DeckDetailsActions from './DeckDetailsActions.vue';
 import BackArrow from '../common/BackArrow.vue';
 import FlashcardCard from '../flashcards/FlashcardCard.vue'
 
-const props = defineProps({ deckId: String, deck: Object })
+const props = defineProps({ deckId: String})
 const { t } = useI18n()
+const deckStore = useDecksStore()
+
+const deck = reactive(deckStore.getDeck(props.deckId))
 
 </script>
 
