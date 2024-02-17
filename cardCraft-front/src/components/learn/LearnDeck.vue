@@ -1,17 +1,22 @@
 <template>
     <div id="deckLearn">
         <learn-header></learn-header>
+        <learn-flashcard></learn-flashcard>
+        <learn-actions></learn-actions>
     </div>
 </template>
 
 <script setup>
-import { useDecksStore } from 'src/stores/decks-store';
+import { useLearnStore } from 'src/stores/learn-store';
 import LearnHeader from './LearnHeader.vue';
+import LearnActions from './LearnActions.vue';
+import LearnFlashcard from './LearnFlashcard.vue';
 
 const props = defineProps({ deckId: String })
-const deckStore = useDecksStore()
+const learnStore = useLearnStore()
 
-const deck = deckStore.getDeck(props.deckId)
+learnStore.getFlashcardsToLearn(props.deckId)
+
 </script>
 
 <style lang="scss">

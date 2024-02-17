@@ -5,6 +5,11 @@
 </template>
 
 <script setup>
+import { useLearnStore } from 'src/stores/learn-store';
+
+const learnStore = useLearnStore()
+
+learnStore.getNextFlashcard()
 
 </script>
 

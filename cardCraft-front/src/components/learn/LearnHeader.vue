@@ -1,7 +1,7 @@
 <template>
     <div id="learnHeader" class="header-primary">
         <back-arrow route="/decks"></back-arrow>
-        <div>1/12</div>
+        <div style="align-self: center;">1/12</div>
         <div><q-icon name="settings" size="35px" color="white" /></div>
     </div>
 </template>
@@ -20,5 +20,6 @@ const props = defineProps({route: String})
     text-align: center;
     color: white;
     padding: .5rem 1rem;
+    font-size: large;
 }
 </style>
