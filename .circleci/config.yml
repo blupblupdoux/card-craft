@@ -13,6 +13,7 @@ jobs:
             cd cardCraft-front
             ls -la
             sudo npm install -g npm@latest
+            sudo npm i -g @quasar/cli
       - node/install-packages:
           app-dir: "./cardCraft-front"
           cache-path: ./node_modules
