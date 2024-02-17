@@ -18,19 +18,25 @@ import { useI18n } from 'vue-i18n';
 import { useLearnStore } from 'src/stores/learn-store';
 import NavBottomLayout from '../nav/NavBottomLayout.vue';
 import { useRouter } from 'vue-router';
+import { api } from 'src/boot/axios';
+import { useUserStore } from 'src/stores/user-store';
 
 const props = defineProps({deckId: String})
 const {t} = useI18n()
 const learnStore = useLearnStore()
+const userStore = useUserStore()
 const router = useRouter()
 
 const answer = () => {
     if(learnStore.answerShown) {
+        const currentFlashcardId = learnStore.flashcard.id
+
+        api.post('/api/answer/create', {user_id: userStore.id, flashcard_id: currentFlashcardId, type: 0})
+
         if(learnStore.isLastFlashcard()) {
             learnStore.resetFlashcard()
             router.push('/deck/' + props.deckId)
         } else {
-            const currentFlashcardId = learnStore.flashcard.id
             learnStore.resetFlashcard()
             learnStore.getNextFlashcard(currentFlashcardId)
         } 

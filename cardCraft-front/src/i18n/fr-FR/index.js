@@ -28,7 +28,7 @@ export default {
     noAccount: "Vous n'avez pas de compte ? Inscrivez-vous gratuitement."
   },
   home: {
-    
+    lastLearntDecks: 'Derniers groupes de cartes appris',
   },
   decks: {
     addDeck: 'Creer',

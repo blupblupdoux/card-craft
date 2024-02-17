@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('decks', function (Blueprint $table) {
-            $table->dateTime('last_learn_at')->nullable();
+            $table->dateTime('last_learnt_at')->nullable();
         });
     }
 

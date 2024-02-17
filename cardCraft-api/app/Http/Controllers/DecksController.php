@@ -16,6 +16,15 @@ class DecksController extends Controller
         return response($decks)->setStatusCode(Response::HTTP_OK);
     }
 
+    public function getLastLearnt()
+    {
+        $decks = Deck::where('user_id', Auth::id())
+                    ->orderBy('last_learnt_at', 'DESC')
+                    ->take(2)
+                    ->get();
+        return response($decks)->setStatusCode(Response::HTTP_OK);
+    }
+
     public function find($id)
     {
         return response(Deck::find($id)->load('flashcards'))->setStatusCode(Response::HTTP_OK);

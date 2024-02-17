@@ -28,7 +28,7 @@ export default {
     noAccount: "You don't have an account? Register for free."
   },
   home: {
-    
+    lastLearntDecks: 'Last learnt decks',
   },
   decks: {
     addDeck: 'New deck',
