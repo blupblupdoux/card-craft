@@ -1,10 +1,11 @@
 <template>
-    <div>
-        
-    </div>
+    <nav-bottom-layout>
+        HELLO
+    </nav-bottom-layout>
 </template>
 
 <script setup>
+import NavBottomLayout from '../nav/NavBottomLayout.vue';
 
 </script>
 
