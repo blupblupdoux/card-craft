@@ -12,6 +12,11 @@ export const useLearnStore = defineStore('learn', {
     //
   },
   actions: {
+    resetLearningSession() {
+      this.resetFlashcard()
+      this.deckId = null
+      this.learningQueue = []
+    },
     resetFlashcard() {
       this.flashcard = null
       this.answerShown = false
@@ -19,18 +24,16 @@ export const useLearnStore = defineStore('learn', {
     updateAnswerShown(bool) {
       this.answerShown = bool
     },
+    getFlashcardIndex(flashcardId) {
+      return this.learningQueue.findIndex(card => card.id === flashcardId)
+    },
     getNextFlashcard(flashcardId) {
       let nextIndex = 0
 
-      console.log('flashcardId: ' + flashcardId)
-
       if(flashcardId) {
-        const currentIndex = this.learningQueue.findIndex(card => card.id === flashcardId)
-        console.log('currentIndex: ' + currentIndex);
+        const currentIndex = this.getFlashcardIndex(flashcardId)
         nextIndex = currentIndex + 1
       }
-
-      console.log('nextIndex: ' + nextIndex);
 
       this.flashcard = this.learningQueue[nextIndex]
     },
@@ -40,6 +43,11 @@ export const useLearnStore = defineStore('learn', {
 
       this.deckId = deckId
       this.learningQueue = deck.flashcards.sort(() => Math.random() - 0.5)
-    }
+    },
+    isLastFlashcard() {
+      const index = this.getFlashcardIndex(this.flashcard.id)
+      const totalFlashcard = this.learningQueue.length
+      return (index + 1) === totalFlashcard
+    },
   },
 });

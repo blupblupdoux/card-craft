@@ -1,8 +1,8 @@
 <template>
-    <div id="deckLearn">
+    <div id="deckLearn" v-if="learnStore.flashcard">
         <learn-header></learn-header>
         <learn-flashcard></learn-flashcard>
-        <learn-actions></learn-actions>
+        <learn-actions :deck-id="props.deckId"></learn-actions>
     </div>
 </template>
 
@@ -16,6 +16,7 @@ const props = defineProps({ deckId: String })
 const learnStore = useLearnStore()
 
 learnStore.getFlashcardsToLearn(props.deckId)
+learnStore.getNextFlashcard(null)
 
 </script>
 
