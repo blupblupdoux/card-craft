@@ -12,6 +12,9 @@ export const useLearnStore = defineStore('learn', {
     //
   },
   actions: {
+    updateAnswerShown(bool) {
+      this.answerShown = bool
+    },
     getNextFlashcard() {
       let nextIndex = 0
 

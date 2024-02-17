@@ -3,7 +3,7 @@
         <div class="learn-flashcard-box learn-flashcard-recto">
             <div>{{ learnStore.flashcard.recto }}</div>
         </div>
-        <div class="learn-flashcard-box learn-flashcard-verso">
+        <div class="learn-flashcard-box learn-flashcard-verso" @click="dispayAnswer">
             <div v-if="learnStore.answerShown">{{ learnStore.flashcard.verso }}</div>
             <div v-else><q-icon name="r_question_mark" size="10rem" color="white" /></div>
         </div>
@@ -16,6 +16,10 @@ import { useLearnStore } from 'src/stores/learn-store';
 const learnStore = useLearnStore()
 
 learnStore.getNextFlashcard()
+
+const dispayAnswer = () => {
+    learnStore.updateAnswerShown(true)
+}
 
 </script>
 
