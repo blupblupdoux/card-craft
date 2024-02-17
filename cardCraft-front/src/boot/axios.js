@@ -8,7 +8,7 @@ import { useUserStore } from 'src/stores/user-store';
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create()
+const api = axios.create({ baseURL: 'https://api.cardcraft.sarah-bobtchev.melin.com'})
 
 // Auth config
 axios.defaults.withCredentials = true;
