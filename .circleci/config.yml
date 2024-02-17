@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
 jobs:
-  build_front:
+  build_deploy_front:
     docker:
       - image: cimg/node:lts-browsers
     steps:
@@ -26,11 +26,10 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y lftp
-            ls -la
+            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-front/dist /; bye"
       
 # Orchestrate our job run sequence
-#lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./dist /; bye"
 workflows:
   build_and_deploy:
     jobs:
-      - build_front
+      - build_deploy_front
