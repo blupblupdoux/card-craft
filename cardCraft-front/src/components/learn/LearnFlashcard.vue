@@ -15,8 +15,6 @@ import { useLearnStore } from 'src/stores/learn-store';
 
 const learnStore = useLearnStore()
 
-learnStore.getNextFlashcard(null)
-
 const dispayAnswer = () => {
     learnStore.updateAnswerShown(true)
 }
