@@ -32,7 +32,7 @@ jobs:
   # build and deploy api files
   build_deploy_api:
     docker:
-      - image: fff
+      - image: cimg/php:8.3.2
     steps:
       - checkout
       - run:
