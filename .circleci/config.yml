@@ -40,7 +40,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y lftp
-            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api/dist/spa /api; bye"
+            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
       
 # Orchestrate our job run sequence
 workflows:
