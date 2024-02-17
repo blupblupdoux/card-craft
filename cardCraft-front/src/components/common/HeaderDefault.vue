@@ -1,6 +1,6 @@
 <template>
     <div class="default-header header-primary">
-        <back-arrow :to="route"></back-arrow>
+        <back-arrow :route="route"></back-arrow>
         <div class="header-title">{{ text }}</div>
     </div>
 </template>

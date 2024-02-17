@@ -22,7 +22,7 @@ const routes = [
     path: '/decks',
     name: "decks",
     meta: { auth: true, navMenu: true },
-    component: () => import('components/decks/DecksPage.vue')
+    component: () => import('components/decks/DecksList.vue')
   },
   {
     path: '/deck/create',
@@ -47,7 +47,7 @@ const routes = [
         name: "deckLearn",
         meta: { auth: true, navMenu: false },
         props: true,
-        component: () => import('components/decks/DeckLearn.vue')
+        component: () => import('components/learn/LearnDeck.vue')
       },
       {
         path: 'edit',
