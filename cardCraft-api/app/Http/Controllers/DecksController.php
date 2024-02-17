@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,15 @@ class DecksController extends Controller
     public function all()
     {
         $decks = Deck::where('user_id', Auth::id())->get();
+        return response($decks)->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function getLastLearnt()
+    {
+        $decks = Deck::where('user_id', Auth::id())
+                    ->orderBy('last_learnt_at', 'DESC')
+                    ->take(2)
+                    ->get();
         return response($decks)->setStatusCode(Response::HTTP_OK);
     }
 
@@ -45,6 +55,16 @@ class DecksController extends Controller
         ]);
 
         Deck::where('id', $validated['id'])->update($validated);
+
+        return response(Deck::find($validated['id']))->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function updateLastLearnAt(Request $request) {
+        $validated = $request->validate([
+            'id' => 'required',
+        ]);
+
+        Deck::where('id', $validated['id'])->update(['last_learn_at' => Carbon::now()]);
 
         return response(Deck::find($validated['id']))->setStatusCode(Response::HTTP_OK);
     }

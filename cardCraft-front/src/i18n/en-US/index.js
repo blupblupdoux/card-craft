@@ -28,7 +28,7 @@ export default {
     noAccount: "You don't have an account? Register for free."
   },
   home: {
-    
+    lastLearntDecks: 'Last learnt decks',
   },
   decks: {
     addDeck: 'New deck',
@@ -56,5 +56,9 @@ export default {
     editTitle: 'Edit flashcard',
     questionLabel: 'Question (recto of the card)',
     answerLabel: 'Answer (verso of the card)',
+  },
+  learn: {
+    displayAnswer: 'Click on the orange card to display the answer',
+    goToNextFlashcard: 'Go to next flashcard',
   }
 }

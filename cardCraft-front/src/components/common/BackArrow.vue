@@ -1,6 +1,6 @@
 <template>
     <router-link :to="route">
-        <q-icon name="keyboard_backspace" size="35px" color="white" />
+        <q-icon name="r_keyboard_backspace" size="35px" color="white" />
     </router-link>
 </template>
 

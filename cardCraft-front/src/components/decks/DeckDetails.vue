@@ -30,9 +30,9 @@
 import { useI18n } from 'vue-i18n';
 import { useDecksStore } from 'src/stores/decks-store';
 import { reactive } from 'vue';
-import DeckDetailsActions from './DeckDetailsActions.vue';
+import DeckDetailsActions from './components/DeckDetailsActions.vue';
 import BackArrow from '../common/BackArrow.vue';
-import FlashcardCard from '../flashcards/FlashcardCard.vue'
+import FlashcardCard from './components/FlashcardCard.vue'
 
 const props = defineProps({ deckId: String})
 const { t } = useI18n()
