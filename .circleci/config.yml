@@ -7,15 +7,19 @@ jobs:
       - image: cimg/node:lts-browsers
     steps:
       - checkout
-      - run: sudo npm install -g npm@latest
+      - run: 
+          name: Install dependencies
+          command: |
+            cd cardCraft-front
+            ls -la
+            sudo npm install -g npm@latest
+      - run: 
       - node/install-packages:
           cache-path: ./node_modules
           override-ci-command: npm install
       - run: 
           name: Build and compile files
           command: |
-            cd cardCraft-front
-            ls -la
             quasar build
       # - run:
       #     name: Deploy via FTP
