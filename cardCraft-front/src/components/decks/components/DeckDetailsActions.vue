@@ -18,9 +18,9 @@ const props = defineProps({ deck: Object })
 const { t } = useI18n()
 
 const navItems = ref([
-    { label: t('decks.actionPlay'), url: '/decks', icon: 'r_play_arrow' },
-    { label: t('decks.actionAddCard'), url: '/deck/' + props.deck.id + '/flashcard/create', icon: 'add' },
-    { label: t('decks.actionEdit'), url: '/deck/' + props.deck.id + '/edit', icon: 'r_edit' },
+    { label: t('decks.actionPlay'), url: `/deck/${props.deck.id}/learn`, icon: 'r_play_arrow' },
+    { label: t('decks.actionAddCard'), url: `/deck/${props.deck.id}/flashcard/create`, icon: 'add' },
+    { label: t('decks.actionEdit'), url: `/deck/${props.deck.id}/edit`, icon: 'r_edit' },
     { label: t('nav.statsBtn'), url: '/stats', icon: 'o_assessment' }
 ])
 </script>
