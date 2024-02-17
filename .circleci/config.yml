@@ -21,14 +21,15 @@ jobs:
           command: |
             cd cardCraft-front
             quasar build
-      # - run:
-      #     name: Deploy via FTP
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt-get install -y lftp
-      #       lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./dist /; bye"
+      - run:
+          name: Deploy front via FTP
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y lftp
+            ls -la
       
 # Orchestrate our job run sequence
+#lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./dist /; bye"
 workflows:
   build_and_deploy:
     jobs:
