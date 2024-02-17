@@ -12,16 +12,25 @@ export const useLearnStore = defineStore('learn', {
     //
   },
   actions: {
+    resetFlashcard() {
+      this.flashcard = null
+      this.answerShown = false
+    },
     updateAnswerShown(bool) {
       this.answerShown = bool
     },
-    getNextFlashcard() {
+    getNextFlashcard(flashcardId) {
       let nextIndex = 0
 
-      if(this.flashcard) {
-        const currentIndex = this.learningQueue.findIndex(card => card.id === this.flashcard.id)
+      console.log('flashcardId: ' + flashcardId)
+
+      if(flashcardId) {
+        const currentIndex = this.learningQueue.findIndex(card => card.id === flashcardId)
+        console.log('currentIndex: ' + currentIndex);
         nextIndex = currentIndex + 1
       }
+
+      console.log('nextIndex: ' + nextIndex);
 
       this.flashcard = this.learningQueue[nextIndex]
     },

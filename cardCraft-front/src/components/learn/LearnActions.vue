@@ -23,7 +23,9 @@ const learnStore = useLearnStore()
 
 const answer = () => {
     if(learnStore.answerShown) {
-        
+        const currentFlashcardId = learnStore.flashcard.id
+        learnStore.resetFlashcard()
+        learnStore.getNextFlashcard(currentFlashcardId)
     }
 }
 
