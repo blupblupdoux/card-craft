@@ -28,6 +28,19 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y lftp
             lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-front/dist/spa /; bye"
+
+    # build and deploy front end files
+  build_deploy_api:
+    docker:
+      - image: fff
+    steps:
+      - checkout
+      - run:
+          name: Deploy front via FTP
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y lftp
+            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api/dist/spa /api; bye"
       
 # Orchestrate our job run sequence
 workflows:
