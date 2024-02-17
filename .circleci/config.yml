@@ -10,8 +10,6 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-            cd cardCraft-front
-            ls -la
             sudo npm install -g npm@latest
             sudo npm i -g @quasar/cli
       - node/install-packages:
@@ -21,6 +19,7 @@ jobs:
       - run: 
           name: Build and compile files
           command: |
+            cd cardCraft-front
             quasar build
       # - run:
       #     name: Deploy via FTP
