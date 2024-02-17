@@ -26,5 +26,9 @@ learnStore.getFlashcardsToLearn(props.deckId)
     .default-header {
         flex-direction: row;
     }
+
+    #navMenu {
+        font-style: italic;
+    }
 }
 </style>

@@ -56,5 +56,9 @@ export default {
     editTitle: 'Modifier la carte',
     questionLabel: 'Question (recto de la carte)',
     answerLabel: 'Réponse (verso de la carte)',
+  },
+  learn: {
+    displayAnswer: 'Cliquez sur la carte orange pour afficher la réponse',
+    goToNextFlashcard: 'Aller à la flashcard suivante',
   }
 }

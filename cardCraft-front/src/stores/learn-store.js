@@ -5,7 +5,8 @@ export const useLearnStore = defineStore('learn', {
   state: () => ({
     deckId: null,
     flashcard: null,
-    learningQueue: []
+    learningQueue: [],
+    answerShown: false
   }),
   getters: {
     //
