@@ -15,7 +15,7 @@ jobs:
             echo "Commit Message: $COMMIT_MSG"
             if [[ $COMMIT_MSG == *"@backOnly"* ]]; then
               echo "Skipping front deploy"
-              exit 0
+              circleci step halt
             else
               echo "Continue deploy"
             fi
@@ -40,8 +40,8 @@ jobs:
             sudo apt-get install -y lftp
 
 workflows:
+  version: 2
   deploy:
     jobs:
       - build_deploy_front:
-          when: << parameters.skipFrontDeploy != 'true' >>
-      #- build_deploy_api
+          skipFrontDeploy: true
