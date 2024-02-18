@@ -6,6 +6,8 @@ jobs:
   build_deploy_front:
     docker:
       - image: cimg/node:lts-browsers
+    environment:
+      SKIP_FRONT_DEPLOY: true
     steps:
       - checkout
       - run:
@@ -48,6 +50,4 @@ workflows:
   version: 2
   deploy:
     jobs:
-      - build_deploy_front:
-          environment:
-            SKIP_FRONT_DEPLOY: true
+      - build_deploy_front
