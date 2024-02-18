@@ -6,8 +6,6 @@ jobs:
   build_deploy_front:
     docker:
       - image: cimg/node:lts-browsers
-    environment:
-      SKIP_FRONT_DEPLOY: true
     steps:
       - checkout
       - run:
@@ -17,7 +15,7 @@ jobs:
             echo "Commit Message: $COMMIT_MSG"
             if [[ $COMMIT_MSG == *"@backOnly"* ]]; then
               echo "Skipping front deploy"
-              exit 0
+              circleci step halt
             else
               echo "Continue deploy"
             fi
@@ -38,13 +36,9 @@ jobs:
       - run:
           name: Deploy front via FTP
           command: |
-            if [ -z "$SKIP_FRONT_DEPLOY" ]; then
-              sudo apt-get update
-              sudo apt-get install -y lftp
-              # Actual deployment commands go here
-            else
-              echo "Skipping front deployment based on condition"
-            fi
+            sudo apt-get update
+            sudo apt-get install -y lftp
+            # Add your actual deployment commands here
 
 workflows:
   version: 2
