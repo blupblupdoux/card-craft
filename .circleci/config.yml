@@ -15,7 +15,7 @@ jobs:
             echo "Commit Message: $COMMIT_MSG"
             if [[ $COMMIT_MSG == *"@backOnly"* ]]; then
               echo "Skipping front deploy"
-              circleci step halt
+              exit 0
             else
               echo "Continue deploy"
             fi
@@ -36,12 +36,18 @@ jobs:
       - run:
           name: Deploy front via FTP
           command: |
-            sudo apt-get update
-            sudo apt-get install -y lftp
+            if [ -z "$SKIP_FRONT_DEPLOY" ]; then
+              sudo apt-get update
+              sudo apt-get install -y lftp
+              # Actual deployment commands go here
+            else
+              echo "Skipping front deployment based on condition"
+            fi
 
 workflows:
   version: 2
   deploy:
     jobs:
       - build_deploy_front:
-          skipFrontDeploy: true
+          environment:
+            SKIP_FRONT_DEPLOY: true
