@@ -3,6 +3,8 @@
 
 cp ../.env ./.env
 
+cp ../.htaccess-quasar ../public/.htaccess
+
 composer install
 
 php artisan key:generate
