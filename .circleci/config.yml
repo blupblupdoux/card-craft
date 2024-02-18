@@ -39,20 +39,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y lftp
 
-  build_deploy_api:
-    docker:
-      - image: cimg/php:8.3.2
-    steps:
-      - checkout
-      - run:
-          name: Deploy api via FTP
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y lftp
-            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
-
 workflows:
   deploy:
     jobs:
-      - build_deploy_front
+      - build_deploy_front:
+          when: << parameters.skipFrontDeploy != 'true' >>
       #- build_deploy_api
