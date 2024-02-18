@@ -38,10 +38,34 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y lftp
-            # Add your actual deployment commands here
+            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-front/dist/spa /public; bye"
 
+  # build and deploy api files
+  build_deploy_api:
+    docker:
+      - image: cimg/php:8.3.2
+    steps:
+      - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: |
+            export COMMIT_MSG=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+            echo "Commit Message: $COMMIT_MSG"
+            if [[ $COMMIT_MSG == *"@frontOnly"* ]]; then
+              echo "Skipping front deploy"
+              circleci step halt
+            else
+              echo "Continue deploy"
+            fi
+      - run:
+          name: Deploy api via FTP
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y lftp
+#lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
 workflows:
   version: 2
   deploy:
     jobs:
       - build_deploy_front
+      - build_deploy_api
