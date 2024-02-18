@@ -54,7 +54,6 @@ workflows:
     when:
       condition:
         equal: [ true, $FRONT_ONLY ]
-      condition: 
     jobs:
       - build_deploy_front
       #- build_deploy_api
