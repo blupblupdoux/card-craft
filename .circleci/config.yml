@@ -12,7 +12,7 @@ jobs:
           name: "Setup custom environment variables"
           command: |
             echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
-            if [[ "$COMMIT_MSG" == *"@backOnly"* ]] ; then exit 0; else echo "Continue deploy..."; fi
+            if [[ "$COMMIT_MSG" == *"@backOnly"* ]] ; then echo "skip front deploy"; exit 0; else echo "Continue deploy"; fi
       - run: 
           name: Install dependencies
           command: |
