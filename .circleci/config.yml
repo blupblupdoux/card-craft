@@ -12,7 +12,7 @@ jobs:
           name: "Setup custom environment variables"
           command: |
             echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
-            if [[ "$COMMIT_MSG" == *"@frontOnly"* ]] ; then export FRONT_ONLY="true"; else export FRONT_ONLY="false"; fi
+            if [[ "$COMMIT_MSG" == *"@frontOnly"* ]] ; then export FRONT_ONLY=true; else export FRONT_ONLY=false; fi
       - run: 
           name: Install dependencies
           command: |
@@ -48,12 +48,12 @@ jobs:
             sudo apt-get install -y lftp
             lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
       
-# Orchestrate our job run  sequence
+# Orchestrate our job run sequence
 workflows:
   front:
     when:
       condition:
-        equal: [ true, $COMMIT_MSG == *"@frontOnly"* ]
+        equal: [ true, $FRONT_ONLY ]
       condition: 
     jobs:
       - build_deploy_front
