@@ -13,7 +13,7 @@ jobs:
           command: |
             export COMMIT_MSG=$(git log --format=%B -n 1 $CIRCLE_SHA1)
             echo "Commit Message: $COMMIT_MSG"
-            if [[ $COMMIT_MSG == *"@backOnly"* ]]; then
+            if [[ $COMMIT_MSG == *"@backOnly"* || !($COMMIT_MSG == *"@deploy") ]]; then
               echo "Skipping front deploy"
               circleci step halt
             else
@@ -51,7 +51,7 @@ jobs:
           command: |
             export COMMIT_MSG=$(git log --format=%B -n 1 $CIRCLE_SHA1)
             echo "Commit Message: $COMMIT_MSG"
-            if [[ $COMMIT_MSG == *"@frontOnly"* ]]; then
+            if [[ $COMMIT_MSG == *"@frontOnly"* || !($COMMIT_MSG == *"@deploy") ]]; then
               echo "Skipping front deploy"
               circleci step halt
             else
@@ -62,7 +62,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y lftp
-#lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
+            lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
+
 workflows:
   version: 2
   deploy:
