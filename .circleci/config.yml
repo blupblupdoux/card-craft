@@ -5,7 +5,7 @@ jobs:
   # build and deploy front end files
   build_deploy_front:
     environment: 
-      COMMIT_MESSAGE: $(git log --format=oneline -n 1 $CIRCLE_SHA1)
+      COMMIT_MESSAGE: \"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
     docker:
       - image: cimg/node:lts-browsers
     steps:
