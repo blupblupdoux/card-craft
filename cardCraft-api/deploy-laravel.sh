@@ -1,4 +1,7 @@
-cd cardcraft.sarah-bobtchev-melin.com/cardcraft/api/
+# cd cardcraft.sarah-bobtchev-melin.com/cardcraft/api/
+# chmod +x ./deploy-laravel.sh && ./deploy-laravel.sh
+
+cp ../.env ./.env
 
 composer install
 
@@ -11,7 +14,5 @@ php artisan route:clear
 php artisan cache:clear
 
 php artisan view:clear
-
-cp ../.env ./api/.env
 
 php artisan serve
