@@ -4,12 +4,13 @@ orbs:
 jobs:
   # build and deploy front end files
   build_deploy_front:
-    environment: 
-      COMMIT_MESSAGE: $(git log --format=oneline -n 1 $CIRCLE_SHA1)
     docker:
       - image: cimg/node:lts-browsers
     steps:
       - checkout
+      - run:
+          name: "Setup custom environment variables"
+          command: echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
       - run: 
           name: Install dependencies
           command: |
