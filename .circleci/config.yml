@@ -13,7 +13,7 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-            echo $COMMIT_MESSAGE
+            echo "$COMMIT_MESSAGE"
             sudo npm install -g npm@latest
             sudo npm i -g @quasar/cli
       - node/install-packages:
