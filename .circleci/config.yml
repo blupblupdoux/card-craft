@@ -10,7 +10,9 @@ jobs:
       - checkout
       - run:
           name: "Setup custom environment variables"
-          command: echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
+          command: |
+            echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
+            if [[ "$COMMIT_MSG" == *"@frontOnly"* ]] ; then export FRONT_ONLY="true"; else export FRONT_ONLY="false"; fi
       - run: 
           name: Install dependencies
           command: |
@@ -48,7 +50,14 @@ jobs:
       
 # Orchestrate our job run sequence
 workflows:
-  build_and_deploy:
+  front:
+    when:
+      condition: $COMMIT_MSG == *"@frontOnly"*
     jobs:
       - build_deploy_front
+      #- build_deploy_api
+  back:
+    when:
+      condition: false
+    jobs:
       #- build_deploy_api
