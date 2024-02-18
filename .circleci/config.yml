@@ -1,8 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+
 jobs:
-  # build and deploy front end files
   build_deploy_front:
     docker:
       - image: cimg/node:lts-browsers
@@ -11,19 +11,24 @@ jobs:
       - run:
           name: "Setup custom environment variables"
           command: |
-            echo "export COMMIT_MSG=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"" >> $BASH_ENV
-            if [ $COMMIT_MSG == *"@backOnly"* ] ; then echo "skip front deploy"; exit 0; else echo "Continue deploy"; fi
-      - run: 
+            export COMMIT_MSG=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+            echo "Commit Message: $COMMIT_MSG"
+            if [[ $COMMIT_MSG == *"@backOnly"* ]]; then
+              echo "Skipping front deploy"
+              exit 0
+            else
+              echo "Continue deploy"
+            fi
+      - run:
           name: Install dependencies
           command: |
-            echo ${COMMIT_MSG}
             sudo npm install -g npm@latest
             sudo npm i -g @quasar/cli
       - node/install-packages:
           app-dir: "./cardCraft-front"
           cache-path: ./node_modules
           override-ci-command: npm install
-      - run: 
+      - run:
           name: Build and compile files
           command: |
             cd cardCraft-front
@@ -34,8 +39,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y lftp
 
-  #lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-front/dist/spa /public; bye"
-  # build and deploy api files
   build_deploy_api:
     docker:
       - image: cimg/php:8.3.2
@@ -47,8 +50,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y lftp
             lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; mirror -R --delete ./cardCraft-api /api; bye"
-      
-# Orchestrate our job run  sequence
+
 workflows:
   deploy:
     jobs:
