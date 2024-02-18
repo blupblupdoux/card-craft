@@ -56,8 +56,8 @@ workflows:
     jobs:
       - build_deploy_front
       #- build_deploy_api
-  back:
-    when:
-      condition: false
-    jobs:
+  # back:
+  #   when:
+  #     condition: false
+  #   jobs:
       #- build_deploy_api
