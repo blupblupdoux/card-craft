@@ -2,7 +2,12 @@
 
 body {
   color: $dark!important;
-  background-color: $light;
+}
+
+@media (min-width: 380px) {
+  body {
+    background-color: $light;
+  }
 }
 
 .page-padding-default {

@@ -1,7 +1,7 @@
 <template>
   <div class="force-mobile-design">
     
-    <q-layout style="min-height: 95vh;">
+    <q-layout>
     <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
       <router-view />
     </div>
@@ -31,9 +31,16 @@ mainStore.initialize()
 .navbar-padding-bottom {
   padding-bottom: 62px;
 }
-.force-mobile-design {
-  max-width: 400px;
-  background-color: white;
-  margin: 15px auto;
+
+@media (min-width: 380px) {
+  .force-mobile-design {
+    max-width: 380px;
+    background-color: white;
+    margin: 15px auto;
+  }
+
+  .q-layout {
+    min-height: 95vh;
+  }
 }
 </style>
