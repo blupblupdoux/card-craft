@@ -52,7 +52,9 @@ jobs:
 workflows:
   front:
     when:
-      condition: $COMMIT_MSG == *"@frontOnly"*
+      condition:
+        equal: [ true, $COMMIT_MSG == *"@frontOnly"* ]
+      condition: 
     jobs:
       - build_deploy_front
       #- build_deploy_api
