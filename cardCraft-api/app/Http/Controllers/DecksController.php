@@ -64,7 +64,7 @@ class DecksController extends Controller
             'id' => 'required',
         ]);
 
-        Deck::where('id', $validated['id'])->update(['last_learn_at' => Carbon::now()]);
+        Deck::where('id', $validated['id'])->update(['last_learnt_at' => Carbon::now()]);
 
         return response(Deck::find($validated['id']))->setStatusCode(Response::HTTP_OK);
     }
