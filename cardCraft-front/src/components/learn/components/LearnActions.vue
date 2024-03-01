@@ -34,7 +34,7 @@ const answer = () => {
         api.post('/api/answer/create', {user_id: userStore.id, flashcard_id: currentFlashcardId, type: 0})
 
         if(learnStore.isLastFlashcard()) {
-            learnStore.resetFlashcard()
+            learnStore.resetLearningSession()
             router.push('/deck/' + props.deckId)
         } else {
             learnStore.resetFlashcard()

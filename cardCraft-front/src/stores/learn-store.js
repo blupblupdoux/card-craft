@@ -18,6 +18,7 @@ export const useLearnStore = defineStore('learn', {
       this.resetFlashcard()
       this.deckId = null
       this.learningQueue = []
+      this.learningType = null
     },
     resetFlashcard() {
       this.flashcard = null

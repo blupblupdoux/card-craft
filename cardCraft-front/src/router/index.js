@@ -2,6 +2,7 @@ import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory, START_LOCATION } from 'vue-router'
 import routes from './routes'
 import { useUserStore } from 'src/stores/user-store'
+import { useLearnStore } from 'src/stores/learn-store'
 
 /*
  * If not building with SSR mode, you can
@@ -30,9 +31,14 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeResolve(async (to, from, next) => {
 
     const userStore = useUserStore()
+    const learnStore = useLearnStore()
 
     if(to.meta.auth && !userStore.token) {
       next({name: 'login'})
+    }
+
+    if(to.name !== 'deckLearn') {
+      learnStore.resetLearningSession()
     }
 
     next()
