@@ -6,7 +6,9 @@ export const useLearnStore = defineStore('learn', {
     deckId: null,
     flashcard: null,
     learningQueue: [],
-    answerShown: false
+    answerShown: false,
+    learningType: null,
+    learningTypesOptions: ['training', 'sa', 'mcq']
   }),
   getters: {
     //
@@ -23,6 +25,9 @@ export const useLearnStore = defineStore('learn', {
     },
     updateAnswerShown(bool) {
       this.answerShown = bool
+    },
+    updateLearningType(newType) {
+      this.learningType = newType
     },
     getFlashcardIndex(flashcardId) {
       return this.learningQueue.findIndex(card => card.id === flashcardId)

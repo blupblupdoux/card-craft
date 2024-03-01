@@ -24,6 +24,12 @@ export const useDecksStore = defineStore('decks', {
     updateDeck(updatedDeck) {
       this.decksList = this.decksList.map(deck => deck.id == updatedDeck.id ? updatedDeck : deck);
     },
+    updateDeckField(id, field, value) {
+      this.decksList = this.decksList.map(deck => {
+        if(deck.id == id ) deck[field] = value
+        return deck
+      });
+    },
     getFlashcardFromDeck(deck, flashcardId) {
       const flashcard = deck.flashcards.filter(flashcard => flashcard.id == flashcardId)
       return flashcard.length > 0 ? flashcard[0] : null

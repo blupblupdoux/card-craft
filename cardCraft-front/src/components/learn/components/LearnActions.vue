@@ -16,7 +16,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useLearnStore } from 'src/stores/learn-store';
-import NavBottomLayout from '../nav/NavBottomLayout.vue';
+import NavBottomLayout from '../../nav/NavBottomLayout.vue';
 import { useRouter } from 'vue-router';
 import { api } from 'src/boot/axios';
 import { useUserStore } from 'src/stores/user-store';
@@ -46,6 +46,6 @@ const answer = () => {
 </script>
 
 <style lang="scss">
-@import '../../css/quasar.variables.scss';
+@import '../../../css/quasar.variables.scss';
 
 </style>
