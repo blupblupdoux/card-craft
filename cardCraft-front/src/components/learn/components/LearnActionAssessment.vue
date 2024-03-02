@@ -1,20 +1,25 @@
 <template>
-  <div class="learn-action-assessment">
-    <div class="learn-action-correct">
+  <div class="learn-action-assessment full-nav-size">
+
+    <div @click="learnStore.answerFlashcard('correct')" class="learn-action-correct">
       <q-icon name="r_check_circle" size="25px" color="positive" style="margin-left: .5rem;" />
       <span>{{ t('learn.learnActionCorrect') }}</span>
     </div>
 
-    <div class="learn-action-wrong">
+    <div @click="learnStore.answerFlashcard('wrong')" class="learn-action-wrong">
       <q-icon name="r_cancel" size="25px" color="negative" style="margin-left: .5rem;" />
       <span>{{ t('learn.learnActionWrong') }}</span>
     </div>
+    
   </div>
 </template>
 
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { useLearnStore } from 'src/stores/learn-store';
+
 const {t} = useI18n()
+const learnStore = useLearnStore()
 </script>
 
 <style lang="scss">
@@ -22,8 +27,6 @@ const {t} = useI18n()
 
 .learn-action-assessment {
   display: flex;
-  width: 100vw;
-  height: $navHeight;
 }
 
 .learn-action-correct, .learn-action-wrong {

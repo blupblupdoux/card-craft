@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia';
 import { useDecksStore } from 'src/stores/decks-store';
+import { useUserStore } from './user-store';
+import { useRouter } from 'vue-router';
+import { api } from 'src/boot/axios';
 
 export const useLearnStore = defineStore('learn', {
   state: () => ({
@@ -55,5 +58,26 @@ export const useLearnStore = defineStore('learn', {
       const totalFlashcard = this.learningQueue.length
       return (index + 1) === totalFlashcard
     },
+    answerFlashcard(answerValue) {
+
+      if(answerValue) {
+        console.log(answerValue)
+        return
+      }
+
+      const router = useRouter()
+      const userStore = useUserStore()
+      const currentFlashcardId = this.flashcard.id
+
+      api.post('/api/answer/create', {user_id: userStore.id, flashcard_id: currentFlashcardId, type: 0})
+
+      if(this.isLastFlashcard()) {
+        this.resetLearningSession()
+        router.push('/deck/' + this.deckId)
+      } else {
+        this.resetFlashcard()
+        this.getNextFlashcard(currentFlashcardId)
+      } 
+    }
   },
 });
