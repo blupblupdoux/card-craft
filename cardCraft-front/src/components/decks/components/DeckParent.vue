@@ -34,7 +34,6 @@ const fetchDeck = () => {
 }
 
 onMounted(() => { 
-    console.log('coucou')
     fetchDeck()
 })
 

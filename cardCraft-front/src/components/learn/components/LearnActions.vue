@@ -1,25 +1,31 @@
 <template>
     <nav-bottom-layout @click="answer">
-        <!-- VERSO -->
-        <div class="next-flashcard" v-if="learnStore.answerShown">
-            {{ t('learn.goToNextFlashcard') }}
-            <q-icon name="arrow_circle_right" size="25px" color="primary" style="margin-left: .5rem;" />
-        </div>
 
         <!-- RECTO -->
-        <div v-else>
-            {{ t('learn.displayAnswer') }}
+        <div v-if="!learnStore.answerShown">
+          {{ t('learn.displayAnswer') }}
         </div>
+
+        <!-- VERSO -->
+        <div v-else class="next-flashcard">
+          <learn-action-assessment v-if="learnStore.learningType === 'sa'"></learn-action-assessment>
+          <learn-action-default v-else></learn-action-default>
+        </div>
+        
+        
     </nav-bottom-layout>
 </template>
 
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useLearnStore } from 'src/stores/learn-store';
-import NavBottomLayout from '../../nav/NavBottomLayout.vue';
 import { useRouter } from 'vue-router';
 import { api } from 'src/boot/axios';
 import { useUserStore } from 'src/stores/user-store';
+
+import NavBottomLayout from '../../nav/NavBottomLayout.vue';
+import LearnActionDefault from './LearnActionDefault.vue';
+import LearnActionAssessment from './LearnActionAssessment.vue';
 
 const props = defineProps({deckId: String})
 const {t} = useI18n()
@@ -44,8 +50,3 @@ const answer = () => {
 }
 
 </script>
-
-<style lang="scss">
-@import '../../../css/quasar.variables.scss';
-
-</style>

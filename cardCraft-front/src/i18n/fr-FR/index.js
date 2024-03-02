@@ -67,5 +67,7 @@ export default {
     'learningTypeDescription-training': "Tout comme les flashcards papier, à l'ancienne. Pas d'évaluation.",
     'learningTypeDescription-sa': "Déterminez vous-même si vous aviez ou non la bonne réponse.",
     'learningTypeDescription-mcq': "Questions à choix multiples. S'il n'y a pas de quizz pour une flashcard, l'auto-évaluation sera affichée.",
+    learnActionCorrect: "J'avais juste",
+    learnActionWrong: "J'avais faux",
   }
 }

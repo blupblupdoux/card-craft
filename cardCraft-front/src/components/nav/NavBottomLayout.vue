@@ -13,7 +13,7 @@
 #navMenu {
     background-color: white;
     border-top: solid 1px $light;
-    height: 62px;
+    height: $navHeight;
     position: absolute;
     max-width: 380px;
     width: 100%;

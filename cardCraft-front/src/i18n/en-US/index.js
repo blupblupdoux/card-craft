@@ -67,5 +67,7 @@ export default {
     'learningTypeDescription-training': 'Just as old school paper flashcards. No assessment.',
     'learningTypeDescription-sa': 'Select by yourself whether or not you had the right answer in mind.',
     'learningTypeDescription-mcq': 'Multiple choice questions. If no quizz for a flashcard, self assessment will be display.',
+    learnActionCorrect: 'I was correct',
+    learnActionWrong: 'I was wrong',
   }
 }
