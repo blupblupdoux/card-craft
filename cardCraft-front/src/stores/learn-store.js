@@ -3,81 +3,88 @@ import { useDecksStore } from 'src/stores/decks-store';
 import { useUserStore } from './user-store';
 import { useRouter } from 'vue-router';
 import { api } from 'src/boot/axios';
+import { ref } from 'vue';
 
-export const useLearnStore = defineStore('learn', {
-  state: () => ({
-    deckId: null,
-    flashcard: null,
-    learningQueue: [],
-    answerShown: false,
-    learningType: null,
-    learningTypesOptions: ['training', 'sa', 'mcq']
-  }),
-  getters: {
-    //
-  },
-  actions: {
-    resetLearningSession() {
-      this.resetFlashcard()
-      this.deckId = null
-      this.learningQueue = []
-      this.learningType = null
-    },
-    resetFlashcard() {
-      this.flashcard = null
-      this.answerShown = false
-    },
-    updateAnswerShown(bool) {
-      this.answerShown = bool
-    },
-    updateLearningType(newType) {
-      this.learningType = newType
-    },
-    getFlashcardIndex(flashcardId) {
-      return this.learningQueue.findIndex(card => card.id === flashcardId)
-    },
-    getNextFlashcard(flashcardId) {
-      let nextIndex = 0
+export const useLearnStore = defineStore('learn', () => {
 
-      if(flashcardId) {
-        const currentIndex = this.getFlashcardIndex(flashcardId)
-        nextIndex = currentIndex + 1
-      }
+  const router = useRouter()
+  const userStore = useUserStore()
+  
+  const deckId = ref(null)
+  const flashcard = ref(null)
+  const learningQueue = ref([])
+  const answerShown = ref(false)
+  const learningType = ref(null)
+  const learningTypesOptions = ['training', 'sa', 'mcq']
 
-      this.flashcard = this.learningQueue[nextIndex]
-    },
-    getFlashcardsToLearn(deckId) {
-      const deckStore = useDecksStore()
-      const deck = deckStore.getDeck(deckId)
+  const resetLearningSession = () => {
+    resetFlashcard()
+    deckId.value = null
+    learningQueue.value = []
+    learningType.value = null
+  }
 
-      this.deckId = deckId
-      this.learningQueue = deck.flashcards.sort(() => Math.random() - 0.5)
-    },
-    isLastFlashcard() {
-      const index = this.getFlashcardIndex(this.flashcard.id)
-      const totalFlashcard = this.learningQueue.length
-      return (index + 1) === totalFlashcard
-    },
-    answerFlashcard(answerValue) {
+  const resetFlashcard = () => {
+    flashcard.value = null
+    answerShown.value = false
+  }
 
-      if(answerValue) {
-        console.log(answerValue)
-        return
-      }
+  const updateAnswerShown = (bool) => {
+    answerShown.value = bool
+  }
 
-      const router = useRouter()
-      const userStore = useUserStore()
-      const currentFlashcardId = this.flashcard.id
+  const updateLearningType = (newType) => {
+    learningType.value = newType
+  }
 
-      api.post('/api/answer/create', {user_id: userStore.id, flashcard_id: currentFlashcardId, type: 0})
+  const getFlashcardIndex = (flashcardId) => {
+    return learningQueue.value.findIndex(card => card.id === flashcardId)
+  }
 
-      if(this.isLastFlashcard()) {
-        this.resetLearningSession()
-        router.push('/deck/' + this.deckId)
-      } else {
-        this.resetFlashcard()
-        this.getNextFlashcard(currentFlashcardId)
-      } 
+  const getNextFlashcard = (flashcardId) => {
+    let nextIndex = 0
+
+    if(flashcardId) {
+      const currentIndex = getFlashcardIndex(flashcardId)
+      nextIndex = currentIndex + 1
     }
-  },
+
+    flashcard.value = learningQueue[nextIndex]
+  }
+
+  const getFlashcardsToLearn = (deckId) =>  {
+    const deckStore = useDecksStore()
+    const deck = deckStore.getDeck(deckId)
+
+    deckId = deckId
+    learningQueue.value = deck.flashcards.sort(() => Math.random() - 0.5)
+  }
+
+  const isLastFlashcard = () => {
+    const index = getFlashcardIndex(flashcard.value.id)
+    const totalFlashcard = learningQueue.value.length
+    return (index + 1) === totalFlashcard
+  }
+
+  const answerFlashcard = (answerValue) => {
+    
+    const currentFlashcardId = flashcard.value.id
+
+    api.post('/api/answer/create', {
+      user_id: userStore.id, 
+      flashcard_id: currentFlashcardId, 
+      type: learningType,
+      answer: answerValue
+    })
+
+    if(isLastFlashcard()) {
+      resetLearningSession()
+      router.push('/deck/' + deckId.value)
+    } else {
+      resetFlashcard()
+      getNextFlashcard(currentFlashcardId)
+    } 
+  }
+
+  return {deckId, flashcard, learningQueue, answerShown, learningType, learningTypesOptions, resetLearningSession, resetFlashcard, updateAnswerShown, updateLearningType, getFlashcardIndex, getNextFlashcard, getFlashcardsToLearn, isLastFlashcard, answerFlashcard}
 });
