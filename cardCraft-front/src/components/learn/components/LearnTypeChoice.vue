@@ -5,8 +5,8 @@
   <div id="learnChoiceTypes" class="page-padding-default">
     <div v-for="type in learnStore.learningTypesOptions" 
         :key="'learning-type-' + type" 
-        @click="learnStore.updateLearningType(type)"
-        class="learning-type-box">
+        @click="answer(type)"
+        :class="['learning-type-box ', {disable: type === 'mcq'}]">
 
       <!-- Title -->
       <div class="learning-type-title">
@@ -31,6 +31,12 @@ import HeaderDefault from 'src/components/common/HeaderDefault.vue';
 const props = defineProps({deckId: String})
 const learnStore = useLearnStore()
 const {t} = useI18n()
+
+const answer = (type) => {
+  if(type !== 'mcq') {
+    learnStore.updateLearningType(type)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -53,6 +59,13 @@ const {t} = useI18n()
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.learning-type-box.disable {
+  filter: brightness(85%);
+    background-color: white;
+    opacity: 60%;
+    cursor: not-allowed;
 }
 
 .learning-type-title {
