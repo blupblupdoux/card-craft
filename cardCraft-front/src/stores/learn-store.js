@@ -72,7 +72,7 @@ export const useLearnStore = defineStore('learn', () => {
       user_id: userStore.id, 
       flashcard_id: currentFlashcardId, 
       type: learningType.value,
-      answer: answerValue
+      value: answerValue
     })
 
     if(isLastFlashcard()) {

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('type');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('flashcard_id')->unsigned();
+            $table->integer('type');
+            $table->integer('value')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

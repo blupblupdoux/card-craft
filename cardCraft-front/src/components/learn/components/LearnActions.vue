@@ -12,14 +12,12 @@
           <learn-action-default v-else></learn-action-default>
         </div>
         
-        
     </nav-bottom-layout>
 </template>
 
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useLearnStore } from 'src/stores/learn-store';
-import { ref } from 'vue';
 
 import NavBottomLayout from '../../nav/NavBottomLayout.vue';
 import LearnActionDefault from './LearnActionDefault.vue';

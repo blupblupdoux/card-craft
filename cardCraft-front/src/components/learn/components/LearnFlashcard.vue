@@ -15,9 +15,6 @@ import { useLearnStore } from 'src/stores/learn-store';
 
 const learnStore = useLearnStore()
 
-console.log('LEARNING TYPE: ')
-console.log(learnStore.learningType)
-
 const dispayAnswer = () => {
     learnStore.updateAnswerShown(true)
 }

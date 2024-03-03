@@ -11,7 +11,7 @@ import { useI18n } from 'vue-i18n';
 
 const {t} = useI18n()
 const learnStore = useLearnStore()
-const answer = () => learnStore.answerFlashcard()
+const answer = () => learnStore.answerFlashcard('training')
 </script>
 
 <style lang="scss">
