@@ -9,6 +9,7 @@ export const useLearnStore = defineStore('learn', () => {
 
   const router = useRouter()
   const userStore = useUserStore()
+  const deckStore = useDecksStore()
   
   const deckId = ref(null)
   const flashcard = ref(null)
@@ -49,13 +50,11 @@ export const useLearnStore = defineStore('learn', () => {
       nextIndex = currentIndex + 1
     }
 
-    flashcard.value = learningQueue[nextIndex]
+    flashcard.value = learningQueue.value[nextIndex]
   }
 
   const getFlashcardsToLearn = (deckId) =>  {
-    const deckStore = useDecksStore()
     const deck = deckStore.getDeck(deckId)
-
     deckId = deckId
     learningQueue.value = deck.flashcards.sort(() => Math.random() - 0.5)
   }
@@ -67,13 +66,12 @@ export const useLearnStore = defineStore('learn', () => {
   }
 
   const answerFlashcard = (answerValue) => {
-    
     const currentFlashcardId = flashcard.value.id
 
     api.post('/api/answer/create', {
       user_id: userStore.id, 
       flashcard_id: currentFlashcardId, 
-      type: learningType,
+      type: learningType.value,
       answer: answerValue
     })
 

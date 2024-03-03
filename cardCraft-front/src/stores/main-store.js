@@ -15,7 +15,7 @@ export const useMainStore = defineStore('main', () => {
     // Load initial data
     await api.get('/api/initialize')
       .then(response => {
-        this.env = response.data.env
+        env.value = response.data.env
         userStore.updateUser(response.data.user)
       })
   }
