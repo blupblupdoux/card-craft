@@ -4,8 +4,7 @@
     v-model="model" 
     side="right" 
     :width="250"
-    overlay 
-    bordered
+    elevated
   >
 
     <!-- HEADER -->
@@ -42,10 +41,6 @@ const name = computed(() => userStore.name ?? userStore.username)
 <style lang="scss">
 @import '../../css/quasar.variables.scss';
 
-.q-drawer--right.q-drawer--bordered {
-    border-left: none;
-}
-
 #navDrawerHeader {
     display: flex;
     flex-direction: column;
@@ -55,6 +50,25 @@ const name = computed(() => userStore.name ?? userStore.username)
 
 #navDrawerMain {
     padding: 1rem;
+}
+
+// Force mobile display on desktop
+@media (min-width: 380px) {
+
+  .q-drawer {
+    top: 2rem;
+  }
+
+  .q-drawer--right {
+    transform: translateX(-206%) !important;
+    max-height: 750px;
+  }
+
+  .fullscreen {
+    max-width: $desktopMaxWidth;
+    max-height: $desktopMaxHeight;
+    margin: 2rem auto;
+  }
 }
 
 </style>

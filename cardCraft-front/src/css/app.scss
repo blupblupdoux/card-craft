@@ -6,7 +6,10 @@ body {
 
 @media (min-width: 380px) {
   body {
-    background-color: $light;
+    max-width: 380px;
+    margin: 2rem auto;
+    background-color: #bfbfbf36;
+    left: 36.5% !important;
   }
 }
 
