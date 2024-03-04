@@ -1,5 +1,5 @@
 <template>
-  <div class="force-mobile-design">
+  <div style="background-color: white;">
     
     <q-layout>
         <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
@@ -36,10 +36,6 @@ mainStore.initialize()
 }
 
 @media (min-width: 380px) {
-  .force-mobile-design {
-    background-color: white;
-  }
-
   .q-layout {
     height: 95vh;
     min-height: 0 !important;
