@@ -2,15 +2,15 @@
   <div class="force-mobile-design">
     
     <q-layout>
-    <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
-      <router-view />
-    </div>
+        <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
+          <router-view />
+        </div>
 
-    <nav-menu v-if="route.meta.navMenu"></nav-menu>
-  </q-layout>
+      <nav-menu v-if="route.meta.navMenu"></nav-menu>
+    </q-layout>
 
   </div>
-</template>
+  </template>
 
 <script setup>
 import { computed } from 'vue';
@@ -27,20 +27,23 @@ const navbarPaddingBottom = computed(() => route.meta.navMenu ? 'navbar-padding-
 mainStore.initialize()
 </script>
 
-<style>
+<style lang="scss">
+
+@import './css/quasar.variables.scss';
+
 .navbar-padding-bottom {
   padding-bottom: 62px;
 }
 
 @media (min-width: 380px) {
   .force-mobile-design {
-    max-width: 380px;
     background-color: white;
-    margin: 15px auto;
   }
 
   .q-layout {
-    min-height: 95vh;
+    height: 95vh;
+    min-height: 0 !important;
+    max-height: $desktopMaxHeight;
   }
 }
 </style>
