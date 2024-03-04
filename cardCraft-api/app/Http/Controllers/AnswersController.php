@@ -13,10 +13,16 @@ class AnswersController extends Controller
         $validated = $request->validate([
             'user_id' => 'required',
             'flashcard_id' => 'required',
-            'type' => 'integer|required'
+            'type' => 'string|required',
+            'value' => 'string|required'
         ]);
 
-        Answer::create($validated);
+        Answer::create([
+            'user_id' => $validated['user_id'],
+            'flashcard_id' => $validated['flashcard_id'],
+            'type' => Answer::$TYPES[$validated['type']],
+            'value' => Answer::$VALUES[$validated['value']],
+        ]);
 
         return response('Answer stored!')->setStatusCode(Response::HTTP_CREATED);
     }

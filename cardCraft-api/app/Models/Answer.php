@@ -11,5 +11,15 @@ class Answer extends Model
 
     protected $guarded = [];
 
-    public static $TYPE_TRAINING = 0;
+    public static $TYPES = [
+        'training' => 0,
+        'sa' => 1,
+        'mcq' => 2
+    ];
+
+    public static $VALUES = [
+        'training' => null,
+        'wrong' => 0,
+        'correct' => 1
+    ];
 }

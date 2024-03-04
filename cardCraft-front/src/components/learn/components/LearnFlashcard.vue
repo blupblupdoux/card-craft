@@ -22,7 +22,7 @@ const dispayAnswer = () => {
 </script>
 
 <style lang="scss">
-@import '../../css/quasar.variables.scss';
+@import '../../../css/quasar.variables.scss';
 
 #learnFlashcard {
     height: 85vh;

@@ -1,6 +1,6 @@
 <template>
     <div id="learnHeader" class="header-primary">
-        <back-arrow route="/decks"></back-arrow>
+        <back-arrow :route="'/deck/' + props.deckId"></back-arrow>
         <div style="align-self: center;">
             {{ currentIndex + '/' + totalFlashcards }}
         </div>
@@ -9,11 +9,11 @@
 </template>
 
 <script setup>
-import BackArrow from '../common/BackArrow.vue';
+import BackArrow from '../../common/BackArrow.vue';
 import { useLearnStore } from 'src/stores/learn-store';
 import { computed } from 'vue';
 
-const props = defineProps({route: String})
+const props = defineProps({deckId: String})
 const learnStore = useLearnStore()
 
 const currentIndex = computed(() => learnStore.getFlashcardIndex(learnStore.flashcard.id) + 1)
