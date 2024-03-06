@@ -23,4 +23,10 @@ const props = defineProps({deckId: String||Integer, flashcard: Object})
     padding: .5rem 1rem;
     margin-bottom: .5rem;
 }
+
+// @media (min-width: 600px) {
+//     .flashcard-card  {
+//         width: 60%;
+//     }
+// }
 </style>

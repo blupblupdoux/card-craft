@@ -1,31 +1,36 @@
 <template>
     <div id="decksPage" class="page-padding-default">
 
-        <!-- Buttons / filters -->
-        <div id="decksFilters">
-            <q-btn icon="add" to="/deck/create" :label="t('decks.addDeck')" size="md" color="primary" />
-            <div style="margin-top: 3px;">
-                <!-- <q-btn icon="tag" :label="t('decks.tagBtn')" size="sm" outline rounded color="dark" style="margin-right: 10px;" /> -->
+        <div id="decksOptions">
 
-                <q-btn-dropdown icon="sort" :label="t('decks.sortBtn')" size="sm" outline rounded color="dark">
-                    <q-list>
-                        <q-item v-for="item in sort" :key="item.key" clickable v-close-popup @click="sortSelected = item.key">
-                            <q-item-section>
-                                <q-item-label>{{ item.label }}</q-item-label>
-                            </q-item-section>
-                        </q-item>
-                    </q-list>
-                </q-btn-dropdown>
+        <!-- Buttons / filters -->
+            <div id="decksFilters">
+                <q-btn icon="add" to="/deck/create" :label="t('decks.addDeck')" size="md" color="primary" />
+                <div style="margin-top: 3px;">
+                    <!-- <q-btn icon="tag" :label="t('decks.tagBtn')" size="sm" outline rounded color="dark" style="margin-right: 10px;" /> -->
+
+                    <q-btn-dropdown icon="sort" :label="t('decks.sortBtn')" size="sm" outline rounded color="dark">
+                        <q-list>
+                            <q-item v-for="item in sort" :key="item.key" clickable v-close-popup @click="sortSelected = item.key">
+                                <q-item-section>
+                                    <q-item-label>{{ item.label }}</q-item-label>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div id="decksSearch">
+                <q-input v-model="query" :label="t('common.search')" dense outlined>
+                    <template v-slot:append>
+                    <q-icon name="search" color="primary" />
+                    </template>
+                </q-input>
             </div>
         </div>
-
-        <!-- Search -->
-        <q-input v-model="query" :label="t('common.search')" dense outlined>
-            <template v-slot:append>
-              <q-icon name="search" color="primary" />
-            </template>
-        </q-input>
-
+        
         <!-- Decks list -->
         <div id="decksList">
             <deck-card v-for="deck in filteredDecks" :key="'deck-card-' + deck.id" :deck="deck"></deck-card>
@@ -105,5 +110,23 @@ const sortDecks = (decks) => {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+@media (min-width: 600px) {
+    #decksOptions {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        padding-bottom: 1rem;
+    }
+
+    #decksSearch .q-field {
+        margin-top: 0;
+        margin-right: 1rem
+    }
+
+    #decksFilters, #decksSearch {
+        width: 50%;
+    }
 }
 </style>

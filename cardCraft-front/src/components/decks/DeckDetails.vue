@@ -74,4 +74,22 @@ const deck = reactive(deckStore.getDeck(props.deckId))
         margin-bottom: 1rem;
     }
 }
+
+@media (min-width: 600px) {
+
+    .header-icons {
+        padding-left: 2rem !important;
+        padding-top: 2rem !important;
+    }
+
+    .header-content {
+        text-align: center;
+    }
+
+    .deck-details-cards {
+        padding-top: 2rem;
+        padding-right: 20%;
+        padding-left: 20%;
+    }
+}
 </style>

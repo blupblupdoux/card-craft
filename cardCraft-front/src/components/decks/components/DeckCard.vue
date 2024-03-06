@@ -18,12 +18,14 @@ const props = defineProps({deck: Object})
 const router = useRouter()
 </script>
 
-<style>
+<style lang="scss">
 .deck-card {
     height: 11rem;
     width: 48%;
+    max-width: 180px;
     border-radius: 10px;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 .deck-card-header {
     height: 58%;
