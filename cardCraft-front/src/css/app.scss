@@ -4,17 +4,14 @@ body {
   color: $dark!important;
 }
 
-@media (min-width: 380px) {
-  body {
-    max-width: 380px;
-    margin: 2rem auto;
-    background-color: #bfbfbf36;
-    left: 36.5% !important;
-  }
-}
-
 .page-padding-default {
   padding: 1rem 1rem 0;
+}
+
+@media (min-width: 600px) {
+  .page-padding-default {
+    padding: 1rem 2rem 0;
+  }
 }
 
 h1 {

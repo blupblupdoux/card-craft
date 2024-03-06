@@ -2,11 +2,11 @@
   <div style="background-color: white;">
     
     <q-layout>
-        <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
-          <router-view />
-        </div>
+      <div v-if="!route.meta.auth || userStore.id" id="mainPage" :class="navbarPaddingBottom">
+        <router-view />
+      </div>
 
-      <nav-menu v-if="route.meta.navMenu"></nav-menu>
+      <nav-menu></nav-menu>
     </q-layout>
 
   </div>
@@ -25,6 +25,7 @@ const userStore = useUserStore()
 const navbarPaddingBottom = computed(() => route.meta.navMenu ? 'navbar-padding-bottom' : '')
 
 mainStore.initialize()
+
 </script>
 
 <style lang="scss">
@@ -35,11 +36,14 @@ mainStore.initialize()
   padding-bottom: 62px;
 }
 
-@media (min-width: 380px) {
-  .q-layout {
-    height: 95vh;
-    min-height: 0 !important;
-    max-height: $desktopMaxHeight;
+@media (min-width: 600px) {
+  #mainPage {
+    margin-left: 250px;
+  }
+
+  .navbar-padding-bottom {
+    padding-bottom: 0;
   }
 }
+
 </style>

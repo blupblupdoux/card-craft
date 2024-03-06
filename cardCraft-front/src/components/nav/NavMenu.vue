@@ -1,29 +1,41 @@
 <template>
-	<nav-bottom-layout>
-		<nav-menu-item
-			v-for="(item, index) in navMenuItems"
-			v-model="drawerOpen"
-			:data="item"
-			:key="index">
-		</nav-menu-item>
 
 		<nav-menu-drawer 
+			v-if="!mainStore.isMobile"
 			v-model="drawerOpen" 
-			:nav-items="navItems">
+			:nav-items="navItems"
+			side="left">
 		</nav-menu-drawer>
-	</nav-bottom-layout>	
+
+		<nav-bottom-layout v-if="route.meta.navMenu && mainStore.isMobile">
+			<nav-menu-item
+				v-for="(item, index) in navMenuItems"
+				v-model="drawerOpen"
+				:data="item"
+				:key="index">
+			</nav-menu-item>
+
+			<nav-menu-drawer 
+				v-model="drawerOpen" 
+				:nav-items="navItems">
+			</nav-menu-drawer>
+		</nav-bottom-layout>	
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import NavBottomLayout from './NavBottomLayout.vue';
 import NavMenuItem from './NavMenuItem.vue';
 import NavMenuDrawer from './NavMenuDrawer.vue';
+import { useMainStore } from 'src/stores/main-store';
 
 const { t } = useI18n()
+const route = useRoute()
+const mainStore = useMainStore()
 
-let drawerOpen = ref(false)
+let drawerOpen = ref(true)
 const navItems = ref([
 	{label: t('nav.homeBtn'), url: '/', click: null, icon: 'home', navMenu: true},
 	{label: t('nav.decksBtn'), url: '/decks', click: null, icon: 'style', navMenu: true},

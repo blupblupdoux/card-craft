@@ -2,7 +2,7 @@
   <q-drawer 
     id="navDrawer"
     v-model="model" 
-    side="right" 
+    :side="side" 
     :width="250"
     elevated
   >
@@ -29,7 +29,7 @@ import { useUserStore } from 'src/stores/user-store';
 import { computed } from 'vue';
 import NavMenuItem from './NavMenuItem.vue';
 
-const props = defineProps({navItems: Object})
+const props = defineProps({navItems: Object, side: {type: String, default: 'right'}})
 const model = defineModel()
 
 const { t } = useI18n()
@@ -50,25 +50,6 @@ const name = computed(() => userStore.name ?? userStore.username)
 
 #navDrawerMain {
     padding: 1rem;
-}
-
-// Force mobile display on desktop
-@media (min-width: 380px) {
-
-  .q-drawer {
-    top: 2rem;
-  }
-
-  .q-drawer--right {
-    transform: translateX(-206%) !important;
-    max-height: 750px;
-  }
-
-  .fullscreen {
-    max-width: $desktopMaxWidth;
-    max-height: $desktopMaxHeight;
-    margin: 2rem auto;
-  }
 }
 
 </style>

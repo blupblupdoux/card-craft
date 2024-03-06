@@ -15,7 +15,6 @@
     border-top: solid 1px $light;
     height: $navHeight;
     position: absolute;
-    max-width: $desktopMaxWidth;
     width: 100%;
     
     display: flex;
