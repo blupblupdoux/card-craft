@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { useUserStore } from './user-store';
 import { api } from 'src/boot/axios';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export const useMainStore = defineStore('main', () => {
   const env = ref('')
+  const isMobile = computed(() => window.innerWidth < 600)
 
   const initialize = async () => {
     const userStore = useUserStore()
@@ -20,5 +21,5 @@ export const useMainStore = defineStore('main', () => {
       })
   }
 
-  return {env, initialize}
+  return {env, isMobile, initialize}
 });

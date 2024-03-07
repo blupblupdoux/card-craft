@@ -6,7 +6,7 @@
           <router-view />
         </div>
 
-      <nav-menu v-if="route.meta.navMenu"></nav-menu>
+      <nav-menu></nav-menu>
     </q-layout>
 
   </div>
