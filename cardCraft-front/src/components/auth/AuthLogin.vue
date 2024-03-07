@@ -48,6 +48,7 @@ let errorMessage = ref('')
 const authenticate = () => {
   api.post('/api/authenticate', form).then(response => {
     userStore.authenticate(response.data)
+    router.push('/')
   }).catch(error => {
     errorMessage.value = error?.response?.data?.message
   })

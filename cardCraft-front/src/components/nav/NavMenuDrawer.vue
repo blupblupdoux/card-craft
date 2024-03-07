@@ -52,23 +52,4 @@ const name = computed(() => userStore.name ?? userStore.username)
     padding: 1rem;
 }
 
-// Force mobile display on desktop
-@media (min-width: 380px) {
-
-  .q-drawer {
-    top: 2rem;
-  }
-
-  .q-drawer--right {
-    transform: translateX(-206%) !important;
-    max-height: 750px;
-  }
-
-  .fullscreen {
-    max-width: $desktopMaxWidth;
-    max-height: $desktopMaxHeight;
-    margin: 2rem auto;
-  }
-}
-
 </style>

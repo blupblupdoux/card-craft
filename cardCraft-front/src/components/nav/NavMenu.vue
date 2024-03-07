@@ -28,7 +28,7 @@ const navItems = ref([
 	{label: t('nav.homeBtn'), url: '/', click: null, icon: 'home', navMenu: true},
 	{label: t('nav.decksBtn'), url: '/decks', click: null, icon: 'style', navMenu: true},
 	{label: t('nav.statsBtn'), url: '/stats', click: null, icon: 'o_assessment', navMenu: true},
-	{label: t('nav.otherBtn'), url: null, click: 'drawer', icon: 'more_horiz', navMenu: true},
+	//{label: t('nav.otherBtn'), url: null, click: 'drawer', icon: 'more_horiz', navMenu: true},
 	{label: t('nav.profileBtn'), url: '/profile', click: null, icon: 'person', navMenu: false},
 	{label: t('nav.tagsBtn'), url: '/tags', click: null, icon: 'label', navMenu: false},
 	{label: t('nav.logoutBtn'), url: null, click: 'logout', icon: 'logout', navMenu: false},
